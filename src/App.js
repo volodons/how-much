@@ -1,5 +1,7 @@
+import Title from "./components/Title/Title";
+
 const App = () => {
-    return <h1>Hello World</h1>;
+    return <Title />;
 };
 
 export default App;
