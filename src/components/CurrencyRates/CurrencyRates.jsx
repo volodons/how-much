@@ -1,7 +1,6 @@
 import { Box, Grid, Typography, styled } from "@mui/material";
 import Flag from "react-world-flags";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-regular-svg-icons";
+import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import "typeface-lobster";
 
 const StyledBox = styled(Box)`
@@ -12,7 +11,7 @@ const StyledBox = styled(Box)`
     padding: 2rem;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
-    background: linear-gradient(to right, #0390fc, #8c0dfc);
+    background: linear-gradient(to right, #0390fc, #562fff);
     transition: box-shadow 0.3s ease-in-out;
     &:hover {
         transform: scale(1.02);
@@ -31,21 +30,29 @@ const StyledGrid = styled(Grid)`
 const StyledTypographyHeading = styled(Typography)`
     margin-bottom: 1rem;
     text-align: center;
-    color: #ffffff;
+    color: #f5f7ff;
     text-decoration: underline;
     font-family: Lobster, sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    &:hover {
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+    }
 `;
 
 const StyledTypographyText = styled(Typography)`
     font-size: 3rem;
-    color: #ffffff;
+    color: #f5f7ff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    &:hover {
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+    }
     transition: color 0.3s ease-in-out;
     &:hover {
         opacity: 0.8;
     }
 `;
 
-const StyledIcon = styled(FontAwesomeIcon)`
+const StyledIcon = styled(StarOutlineIcon)`
     width: 3rem;
     height: 3rem;
     color: #ffd700;
@@ -55,8 +62,12 @@ const StyledIcon = styled(FontAwesomeIcon)`
 `;
 
 const StyledFlag = styled(Flag)`
+    width: 6rem;
+    border-radius: 5px;
     transition: color 0.3s ease-in-out;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     &:hover {
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
         opacity: 0.8;
     }
 `;
@@ -70,10 +81,10 @@ const CurrencyRates = () => {
             <Grid container>
                 <StyledGrid container>
                     <Grid item>
-                        <Grid container alignItems="center" columnGap="3rem">
-                            <StyledIcon icon={faStar} />
-                            <StyledFlag code="USA" height="96" width="96" />
-                        </Grid>
+                        <StyledIcon />
+                    </Grid>
+                    <Grid item>
+                        <StyledFlag code="USA" />
                     </Grid>
                     <Grid item>
                         <StyledTypographyText>5</StyledTypographyText>
@@ -81,10 +92,10 @@ const CurrencyRates = () => {
                 </StyledGrid>
                 <StyledGrid container>
                     <Grid item>
-                        <Grid container alignItems="center" columnGap="3rem">
-                            <StyledIcon icon={faStar} />
-                            <StyledFlag code="EU" height="96" width="96" />
-                        </Grid>
+                        <StyledIcon />
+                    </Grid>
+                    <Grid item>
+                        <StyledFlag code="EU" />
                     </Grid>
                     <Grid item>
                         <StyledTypographyText>10</StyledTypographyText>
@@ -92,10 +103,10 @@ const CurrencyRates = () => {
                 </StyledGrid>
                 <StyledGrid container>
                     <Grid item>
-                        <Grid container alignItems="center" columnGap="3rem">
-                            <StyledIcon icon={faStar} />
-                            <StyledFlag code="JPN" height="96" width="96" />
-                        </Grid>
+                        <StyledIcon />
+                    </Grid>
+                    <Grid item>
+                        <StyledFlag code="JPN" />
                     </Grid>
                     <Grid item>
                         <StyledTypographyText>15</StyledTypographyText>
@@ -103,10 +114,10 @@ const CurrencyRates = () => {
                 </StyledGrid>
                 <StyledGrid container>
                     <Grid item>
-                        <Grid container alignItems="center" columnGap="3rem">
-                            <StyledIcon icon={faStar} />
-                            <StyledFlag code="GBR" height="96" width="96" />
-                        </Grid>
+                        <StyledIcon />
+                    </Grid>
+                    <Grid item>
+                        <StyledFlag code="GBR" />
                     </Grid>
                     <Grid item>
                         <StyledTypographyText>20</StyledTypographyText>
@@ -114,10 +125,10 @@ const CurrencyRates = () => {
                 </StyledGrid>
                 <StyledGrid container>
                     <Grid item>
-                        <Grid container alignItems="center" columnGap="3rem">
-                            <StyledIcon icon={faStar} />
-                            <StyledFlag code="CHN" height="96" width="96" />
-                        </Grid>
+                        <StyledIcon />
+                    </Grid>
+                    <Grid item>
+                        <StyledFlag code="CHN" />
                     </Grid>
                     <Grid item>
                         <StyledTypographyText>25</StyledTypographyText>
@@ -125,10 +136,10 @@ const CurrencyRates = () => {
                 </StyledGrid>
                 <StyledGrid container>
                     <Grid item>
-                        <Grid container alignItems="center" columnGap="3rem">
-                            <StyledIcon icon={faStar} />
-                            <StyledFlag code="AUS" height="96" width="96" />
-                        </Grid>
+                        <StyledIcon />
+                    </Grid>
+                    <Grid item>
+                        <StyledFlag code="AUS" />
                     </Grid>
                     <Grid item>
                         <StyledTypographyText>30</StyledTypographyText>
@@ -136,10 +147,10 @@ const CurrencyRates = () => {
                 </StyledGrid>
                 <StyledGrid container>
                     <Grid item>
-                        <Grid container alignItems="center" columnGap="3rem">
-                            <StyledIcon icon={faStar} />
-                            <StyledFlag code="CAN" height="96" width="96" />
-                        </Grid>
+                        <StyledIcon />
+                    </Grid>
+                    <Grid item>
+                        <StyledFlag code="CAN" />
                     </Grid>
                     <Grid item>
                         <StyledTypographyText>35</StyledTypographyText>
@@ -147,10 +158,10 @@ const CurrencyRates = () => {
                 </StyledGrid>
                 <StyledGrid container>
                     <Grid item>
-                        <Grid container alignItems="center" columnGap="3rem">
-                            <StyledIcon icon={faStar} />
-                            <StyledFlag code="CHE" height="96" width="96" />
-                        </Grid>
+                        <StyledIcon />
+                    </Grid>
+                    <Grid item>
+                        <StyledFlag code="CHE" />
                     </Grid>
                     <Grid item>
                         <StyledTypographyText>40</StyledTypographyText>
@@ -158,10 +169,10 @@ const CurrencyRates = () => {
                 </StyledGrid>
                 <StyledGrid container>
                     <Grid item>
-                        <Grid container alignItems="center" columnGap="3rem">
-                            <StyledIcon icon={faStar} />
-                            <StyledFlag code="POL" height="96" width="96" />
-                        </Grid>
+                        <StyledIcon />
+                    </Grid>
+                    <Grid item>
+                        <StyledFlag code="POL" />
                     </Grid>
                     <Grid item>
                         <StyledTypographyText>45</StyledTypographyText>
@@ -169,10 +180,10 @@ const CurrencyRates = () => {
                 </StyledGrid>
                 <StyledGrid container>
                     <Grid item>
-                        <Grid container alignItems="center" columnGap="3rem">
-                            <StyledIcon icon={faStar} />
-                            <StyledFlag code="ISR" height="96" width="96" />
-                        </Grid>
+                        <StyledIcon />
+                    </Grid>
+                    <Grid item>
+                        <StyledFlag code="ISR" />
                     </Grid>
                     <Grid item>
                         <StyledTypographyText>50</StyledTypographyText>
