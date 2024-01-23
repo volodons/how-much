@@ -1,7 +1,8 @@
-import Title from "../../components/Title/Title";
+import "typeface-lobster";
+import CurrencyConverter from "../../components/CurrencyConverter/CurrencyConverter";
 
 const CurrencyConverterPage = () => {
-    return <Title />;
+    return <CurrencyConverter />;
 };
 
 export default CurrencyConverterPage;
