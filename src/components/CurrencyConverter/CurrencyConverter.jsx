@@ -1,15 +1,14 @@
 import CURRENCIES from "../../const/currencies/currencies";
-import {
-    Autocomplete,
-    Box,
-    Grid,
-    IconButton,
-    Input,
-    styled,
-    TextField,
-    Typography,
-} from "@mui/material";
+import Flag from "react-world-flags";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
+import Autocomplete from "@mui/material/Autocomplete";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import Input from "@mui/material/Input";
+import { styled } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 
 const StyledTypographyHeading = styled(Typography)`
     margin-bottom: 2rem;
@@ -20,6 +19,9 @@ const StyledTypographyHeading = styled(Typography)`
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     &:hover {
         text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+    }
+    @media (max-width: 600px) {
+        font-size: 2.5rem;
     }
 `;
 
@@ -39,24 +41,31 @@ const StyledBox = styled(Box)`
     background: linear-gradient(to right, #0390fc, #562fff);
     transition: box-shadow 0.3s ease-in-out;
     &:hover {
+        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
         transform: scale(1.02);
     }
-    transition: box-shadow 0.3s ease-in-out;
-    &:hover {
-        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    @media (max-width: 900px) {
+        width: 75%;
+    }
+    @media (max-width: 600px) {
+        width: auto;
+        max-width: 100%;
     }
 `;
 
-const StyledOuterGrid = styled(Grid)`
+const StyledOuterGridContainer = styled(Grid)`
     display: flex;
     flex-direction: column;
     align-items: center;
     row-gap: 1rem;
 `;
 
-const StyledGrid = styled(Grid)`
+const StyledInnerGridContainer = styled(Grid)`
     display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     column-gap: 5rem;
+    row-gap: 1rem;
 `;
 
 const StyledGridItem = styled(Grid)`
@@ -67,15 +76,6 @@ const StyledInput = styled(Input)`
     width: 100%;
     text-align: center;
     border-color: #f5f7ff;
-    &:hover {
-        border-color: #f5f7ff;
-    }
-    & .MuiInputBase-root-MuiInput-root:hover:not {
-        border-color: #f5f7ff;
-        &:hover {
-            border-bottom-color: #f5f7ff;
-        }
-    }
     & .MuiInputBase-input {
         text-align: center;
         color: #ffffff;
@@ -127,20 +127,26 @@ const StyledIconButton = styled(IconButton)`
     }
 `;
 
+const StyledFlag = styled(Flag)`
+    width: 2rem;
+    height: 2rem;
+    margin-right: 1rem;
+`;
+
+const StyledCurrencyExchangeIcon = styled(CurrencyExchangeIcon)`
+    font-size: 2rem;
+    color: #f5f7ff;
+`;
+
 const CurrencyConverter = () => {
     return (
         <StyledBox>
             <StyledTypographyHeading variant="h2">
                 Currency Converter
             </StyledTypographyHeading>
-            <StyledOuterGrid container>
-                <StyledGrid
-                    container
-                    direction="column"
-                    justifyContent="space-evenly"
-                    rowGap="1rem"
-                >
-                    <Grid container justifyContent="center">
+            <StyledOuterGridContainer container>
+                <StyledInnerGridContainer container>
+                    <Grid container>
                         <StyledGridItem item>
                             <StyledInput
                                 placeholder="Type in number"
@@ -151,8 +157,11 @@ const CurrencyConverter = () => {
                     </Grid>
                     <Grid item>
                         <Autocomplete
-                            defaultValue="UAH"
+                            defaultValue={CURRENCIES[0].currency}
                             options={CURRENCIES}
+                            getOptionLabel={(option) =>
+                                option.currency || CURRENCIES[0].currency
+                            }
                             renderInput={(params) => (
                                 <StyledTextFiled
                                     {...params}
@@ -160,13 +169,21 @@ const CurrencyConverter = () => {
                                     required
                                 />
                             )}
-                            sx={{ flexGrow: "1" }}
+                            renderOption={(props, option) => (
+                                <Box component="li" {...props}>
+                                    <StyledFlag code={option.country} />
+                                    {option.currency}
+                                </Box>
+                            )}
                         />
                     </Grid>
                     <Grid item>
                         <Autocomplete
-                            defaultValue="UAH"
+                            defaultValue={CURRENCIES[0].currency}
                             options={CURRENCIES}
+                            getOptionLabel={(option) =>
+                                option.currency || CURRENCIES[0].currency
+                            }
                             renderInput={(params) => (
                                 <StyledTextFiled
                                     {...params}
@@ -174,18 +191,22 @@ const CurrencyConverter = () => {
                                     required
                                 />
                             )}
+                            renderOption={(props, option) => (
+                                <Box component="li" {...props}>
+                                    <StyledFlag code={option.country} />
+                                    {option.currency}
+                                </Box>
+                            )}
                         />
                     </Grid>
-                </StyledGrid>
+                </StyledInnerGridContainer>
                 <StyledIconButton>
-                    <CurrencyExchangeIcon
-                        sx={{ fontSize: "2rem", color: "#f5f7ff" }}
-                    />
+                    <StyledCurrencyExchangeIcon />
                     <StyledTypographyButton variant="button">
                         Convert
                     </StyledTypographyButton>
                 </StyledIconButton>
-                <StyledGrid container justifyContent="center">
+                <StyledInnerGridContainer container>
                     <StyledGridItem item>
                         <StyledInput
                             placeholder="Result"
@@ -193,8 +214,8 @@ const CurrencyConverter = () => {
                             readOnly
                         />
                     </StyledGridItem>
-                </StyledGrid>
-            </StyledOuterGrid>
+                </StyledInnerGridContainer>
+            </StyledOuterGridContainer>
         </StyledBox>
     );
 };

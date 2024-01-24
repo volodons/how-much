@@ -1,4 +1,3 @@
-import "typeface-lobster";
 import CurrencyConverter from "../../components/CurrencyConverter/CurrencyConverter";
 
 const CurrencyConverterPage = () => {
