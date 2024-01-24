@@ -1,12 +1,10 @@
-import {
-    Autocomplete,
-    Box,
-    TextField,
-    Typography,
-    styled,
-} from "@mui/material";
-import "typeface-lobster";
 import CURRENCIES from "../../const/currencies/currencies";
+import Flag from "react-world-flags";
+import Autocomplete from "@mui/material/Autocomplete";
+import Box from "@mui/material/Box";
+import { styled } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 
 const StyledBox = styled(Box)`
     width: 50%;
@@ -18,24 +16,33 @@ const StyledBox = styled(Box)`
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     background: linear-gradient(to right, #0390fc, #562fff);
-    transition: transform 0.2s ease-in-out;
-    &:hover {
-        transform: scale(1.02);
-    }
     transition: box-shadow 0.3s ease-in-out;
     &:hover {
         box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+        transform: scale(1.02);
+    }
+    @media (max-width: 1000px) {
+        width: 75%;
+    }
+    @media (max-width: 800px) {
+        width: 90%;
+    }
+    @media (max-width: 600px) {
+        width: auto;
     }
 `;
 
 const StyledTypography = styled(Typography)`
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     color: #f5f7ff;
     text-decoration: underline;
     font-family: lobster, sans-serif;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     &:hover {
         text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+    }
+    @media (max-width: 600px) {
+        font-size: 2.5rem;
     }
 `;
 
@@ -73,18 +80,30 @@ const StyledTextFiled = styled(TextField)`
     }
 `;
 
+const StyledFlag = styled(Flag)`
+    width: 2rem;
+    height: 2rem;
+    margin-right: 1rem;
+`;
+
 const CurrentCurrency = () => {
     return (
         <StyledBox>
             <StyledTypography variant="h2">Current Currency</StyledTypography>
-            <Typography sx={{ color: "#ffffff" }}>
-                Your current currency is:
-            </Typography>
             <Autocomplete
-                defaultValue={CURRENCIES[0]}
+                defaultValue={CURRENCIES[0].currency}
                 options={CURRENCIES}
+                getOptionLabel={(option) =>
+                    option.currency || CURRENCIES[0].currency
+                }
                 renderInput={(params) => (
                     <StyledTextFiled {...params} label="Choose Your Currency" />
+                )}
+                renderOption={(props, option) => (
+                    <Box component="li" {...props}>
+                        <StyledFlag code={option.country} />
+                        {option.currency}
+                    </Box>
                 )}
             />
         </StyledBox>
