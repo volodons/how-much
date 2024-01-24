@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import PriceChangeIcon from "@mui/icons-material/PriceChange";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
@@ -49,6 +50,10 @@ const StyledButtonBox = styled(Box)`
     margin-bottom: 1rem;
 `;
 
+const StyledLink = styled(Link)`
+    all: unset;
+`;
+
 const StyledListBox = styled(Box)`
     color: #f5f7ff;
 `;
@@ -56,6 +61,7 @@ const StyledListBox = styled(Box)`
 const StyledListItemButton = styled(ListItemButton)`
     border: 2px solid #f5f7ff;
     border-radius: 10px;
+    width: 280px;
 `;
 
 const StyledListItemText = styled(ListItemText)`
@@ -92,24 +98,28 @@ const Navigation = () => {
                 <StyledListBox>
                     <List>
                         <ListItem>
-                            <StyledListItemButton>
-                                <ListItemIcon>
-                                    <StyledCurrencyExchangeIcon />
-                                </ListItemIcon>
-                                <StyledListItemText>
-                                    Currency Converter
-                                </StyledListItemText>
-                            </StyledListItemButton>
+                            <StyledLink to="/">
+                                <StyledListItemButton>
+                                    <ListItemIcon>
+                                        <StyledCurrencyExchangeIcon />
+                                    </ListItemIcon>
+                                    <StyledListItemText>
+                                        Currency Converter
+                                    </StyledListItemText>
+                                </StyledListItemButton>
+                            </StyledLink>
                         </ListItem>
                         <ListItem>
-                            <StyledListItemButton>
-                                <ListItemIcon>
-                                    <StyledPriceChangeIcon />
-                                </ListItemIcon>
-                                <StyledListItemText>
-                                    Exchange Rates
-                                </StyledListItemText>
-                            </StyledListItemButton>
+                            <StyledLink to="/rates">
+                                <StyledListItemButton>
+                                    <ListItemIcon>
+                                        <StyledPriceChangeIcon />
+                                    </ListItemIcon>
+                                    <StyledListItemText>
+                                        Exchange Rates
+                                    </StyledListItemText>
+                                </StyledListItemButton>
+                            </StyledLink>
                         </ListItem>
                     </List>
                 </StyledListBox>
