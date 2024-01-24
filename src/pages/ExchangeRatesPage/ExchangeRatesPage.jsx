@@ -1,5 +1,5 @@
 import CurrentCurrency from "../../components/CurrentCurrency/CurrentCurrency";
-import CurrencyRates from "../../components/CurrencyRates/CurrencyRates";
+import ExchangeRates from "../../components/ExchangeRates/ExchangeRates";
 import { Box, styled } from "@mui/material";
 
 const StyledBox = styled(Box)`
@@ -8,13 +8,13 @@ const StyledBox = styled(Box)`
     align-items: center;
 `;
 
-const CurrencyRatesPage = () => {
+const ExchangeRatesPage = () => {
     return (
         <StyledBox>
             <CurrentCurrency />
-            <CurrencyRates />
+            <ExchangeRates />
         </StyledBox>
     );
 };
 
-export default CurrencyRatesPage;
+export default ExchangeRatesPage;

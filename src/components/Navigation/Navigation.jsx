@@ -98,7 +98,7 @@ const Navigation = () => {
                                     />
                                 </ListItemIcon>
                                 <StyledListItemText>
-                                    Currency Rates
+                                    Exchange Rates
                                 </StyledListItemText>
                             </StyledListItemButton>
                         </ListItem>

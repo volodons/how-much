@@ -72,11 +72,11 @@ const StyledFlag = styled(Flag)`
     }
 `;
 
-const CurrencyRates = () => {
+const ExchangeRates = () => {
     return (
         <StyledBox>
             <StyledTypographyHeading variant="h2">
-                Currency Rates
+                Exchange Rates
             </StyledTypographyHeading>
             <Grid container>
                 <StyledGrid container>
@@ -194,4 +194,4 @@ const CurrencyRates = () => {
     );
 };
 
-export default CurrencyRates;
+export default ExchangeRates;
