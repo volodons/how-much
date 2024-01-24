@@ -1,27 +1,46 @@
 import { useState } from "react";
-import Drawer from "@mui/material/Drawer";
-import Button from "@mui/material/Button";
-import {
-    Box,
-    List,
-    ListItem,
-    ListItemButton,
-    ListItemIcon,
-    ListItemText,
-} from "@mui/material";
-import { styled } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import PriceChangeIcon from "@mui/icons-material/PriceChange";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import CloseIcon from "@mui/icons-material/Close";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import { styled } from "@mui/material/styles";
 
 const StyledOpenButton = styled(Button)`
     position: absolute;
+    margin-top: 1.5rem;
     color: #f5f7ff;
+    @media (max-width: 600px) {
+        position: static;
+        margin-top: 0;
+    }
+`;
+
+const StyledOpenButtonIcon = styled(MenuIcon)`
+    font-size: 2rem;
 `;
 
 const StyledCloseButton = styled(Button)`
     color: #f5f7ff;
+`;
+
+const StyledCloseButtonIcon = styled(CloseIcon)`
+    font-size: 2rem;
+    color: #f5f7ff;
+`;
+
+const StyledDrawer = styled(Drawer)`
+    & .MuiDrawer-paper {
+        padding: 1rem;
+        background-color: #0390fc;
+    }
 `;
 
 const StyledButtonBox = styled(Box)`
@@ -45,8 +64,18 @@ const StyledListItemText = styled(ListItemText)`
     }
 `;
 
+const StyledCurrencyExchangeIcon = styled(CurrencyExchangeIcon)`
+    font-size: 2rem;
+    color: #f5f7ff;
+`;
+
+const StyledPriceChangeIcon = styled(PriceChangeIcon)`
+    font-size: 2rem;
+    color: #f5f7ff;
+`;
+
 const Navigation = () => {
-    const [openDrawer, setOpenDrawer] = useState(null);
+    const [openDrawer, setOpenDrawer] = useState(false);
 
     const handleToggleDrawer = () => {
         setOpenDrawer(!openDrawer);
@@ -54,20 +83,10 @@ const Navigation = () => {
 
     return (
         <>
-            <Drawer
-                open={openDrawer}
-                sx={{
-                    "& .MuiDrawer-paper": {
-                        padding: "1rem",
-                        backgroundColor: "#0390fc",
-                    },
-                }}
-            >
+            <StyledDrawer open={openDrawer}>
                 <StyledButtonBox>
                     <StyledCloseButton onClick={handleToggleDrawer}>
-                        <CloseIcon
-                            sx={{ fontSize: "2rem", color: "#f5f7ff" }}
-                        />
+                        <StyledCloseButtonIcon />
                     </StyledCloseButton>
                 </StyledButtonBox>
                 <StyledListBox>
@@ -75,12 +94,7 @@ const Navigation = () => {
                         <ListItem>
                             <StyledListItemButton>
                                 <ListItemIcon>
-                                    <CurrencyExchangeIcon
-                                        sx={{
-                                            fontSize: "2rem",
-                                            color: "#f5f7ff",
-                                        }}
-                                    />
+                                    <StyledCurrencyExchangeIcon />
                                 </ListItemIcon>
                                 <StyledListItemText>
                                     Currency Converter
@@ -90,12 +104,7 @@ const Navigation = () => {
                         <ListItem>
                             <StyledListItemButton>
                                 <ListItemIcon>
-                                    <PriceChangeIcon
-                                        sx={{
-                                            fontSize: "2rem",
-                                            color: "#f5f7ff",
-                                        }}
-                                    />
+                                    <StyledPriceChangeIcon />
                                 </ListItemIcon>
                                 <StyledListItemText>
                                     Exchange Rates
@@ -104,15 +113,9 @@ const Navigation = () => {
                         </ListItem>
                     </List>
                 </StyledListBox>
-            </Drawer>
+            </StyledDrawer>
             <StyledOpenButton onClick={handleToggleDrawer}>
-                <MenuIcon
-                    sx={{
-                        marginTop: "1.5rem",
-                        fontSize: "2rem",
-                        color: "#f5f7ff",
-                    }}
-                />
+                <StyledOpenButtonIcon />
             </StyledOpenButton>
         </>
     );
