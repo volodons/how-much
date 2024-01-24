@@ -1,6 +1,7 @@
 import CurrentCurrency from "../../components/CurrentCurrency/CurrentCurrency";
 import ExchangeRates from "../../components/ExchangeRates/ExchangeRates";
-import { Box, styled } from "@mui/material";
+import Box from "@mui/material/Box";
+import { styled } from "@mui/material/styles";
 
 const StyledBox = styled(Box)`
     display: flex;

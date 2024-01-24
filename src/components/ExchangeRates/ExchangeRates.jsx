@@ -1,7 +1,10 @@
-import { Box, Grid, Typography, styled } from "@mui/material";
+import CURRENCIES from "../../const/currencies/currencies";
 import Flag from "react-world-flags";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
-import "typeface-lobster";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import { styled } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 
 const StyledBox = styled(Box)`
     width: 50%;
@@ -14,11 +17,17 @@ const StyledBox = styled(Box)`
     background: linear-gradient(to right, #0390fc, #562fff);
     transition: box-shadow 0.3s ease-in-out;
     &:hover {
+        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
         transform: scale(1.02);
     }
-    transition: box-shadow 0.3s ease-in-out;
-    &:hover {
-        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    @media (max-width: 1000px) {
+        width: 75%;
+    }
+    @media (max-width: 800px) {
+        width: 90%;
+    }
+    @media (max-width: 600px) {
+        width: auto;
     }
 `;
 
@@ -28,7 +37,7 @@ const StyledGrid = styled(Grid)`
 `;
 
 const StyledTypographyHeading = styled(Typography)`
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     text-align: center;
     color: #f5f7ff;
     text-decoration: underline;
@@ -37,17 +46,18 @@ const StyledTypographyHeading = styled(Typography)`
     &:hover {
         text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
     }
+    @media (max-width: 600px) {
+        font-size: 2.5rem;
+    }
 `;
 
 const StyledTypographyText = styled(Typography)`
     font-size: 3rem;
     color: #f5f7ff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    &:hover {
-        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
-    }
     transition: color 0.3s ease-in-out;
     &:hover {
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
         opacity: 0.8;
     }
 `;
@@ -64,8 +74,8 @@ const StyledIcon = styled(StarOutlineIcon)`
 const StyledFlag = styled(Flag)`
     width: 6rem;
     border-radius: 5px;
-    transition: color 0.3s ease-in-out;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    transition: color 0.3s ease-in-out;
     &:hover {
         box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
         opacity: 0.8;
@@ -79,116 +89,19 @@ const ExchangeRates = () => {
                 Exchange Rates
             </StyledTypographyHeading>
             <Grid container>
-                <StyledGrid container>
-                    <Grid item>
-                        <StyledIcon />
-                    </Grid>
-                    <Grid item>
-                        <StyledFlag code="USA" />
-                    </Grid>
-                    <Grid item>
-                        <StyledTypographyText>5</StyledTypographyText>
-                    </Grid>
-                </StyledGrid>
-                <StyledGrid container>
-                    <Grid item>
-                        <StyledIcon />
-                    </Grid>
-                    <Grid item>
-                        <StyledFlag code="EU" />
-                    </Grid>
-                    <Grid item>
-                        <StyledTypographyText>10</StyledTypographyText>
-                    </Grid>
-                </StyledGrid>
-                <StyledGrid container>
-                    <Grid item>
-                        <StyledIcon />
-                    </Grid>
-                    <Grid item>
-                        <StyledFlag code="JPN" />
-                    </Grid>
-                    <Grid item>
-                        <StyledTypographyText>15</StyledTypographyText>
-                    </Grid>
-                </StyledGrid>
-                <StyledGrid container>
-                    <Grid item>
-                        <StyledIcon />
-                    </Grid>
-                    <Grid item>
-                        <StyledFlag code="GBR" />
-                    </Grid>
-                    <Grid item>
-                        <StyledTypographyText>20</StyledTypographyText>
-                    </Grid>
-                </StyledGrid>
-                <StyledGrid container>
-                    <Grid item>
-                        <StyledIcon />
-                    </Grid>
-                    <Grid item>
-                        <StyledFlag code="CHN" />
-                    </Grid>
-                    <Grid item>
-                        <StyledTypographyText>25</StyledTypographyText>
-                    </Grid>
-                </StyledGrid>
-                <StyledGrid container>
-                    <Grid item>
-                        <StyledIcon />
-                    </Grid>
-                    <Grid item>
-                        <StyledFlag code="AUS" />
-                    </Grid>
-                    <Grid item>
-                        <StyledTypographyText>30</StyledTypographyText>
-                    </Grid>
-                </StyledGrid>
-                <StyledGrid container>
-                    <Grid item>
-                        <StyledIcon />
-                    </Grid>
-                    <Grid item>
-                        <StyledFlag code="CAN" />
-                    </Grid>
-                    <Grid item>
-                        <StyledTypographyText>35</StyledTypographyText>
-                    </Grid>
-                </StyledGrid>
-                <StyledGrid container>
-                    <Grid item>
-                        <StyledIcon />
-                    </Grid>
-                    <Grid item>
-                        <StyledFlag code="CHE" />
-                    </Grid>
-                    <Grid item>
-                        <StyledTypographyText>40</StyledTypographyText>
-                    </Grid>
-                </StyledGrid>
-                <StyledGrid container>
-                    <Grid item>
-                        <StyledIcon />
-                    </Grid>
-                    <Grid item>
-                        <StyledFlag code="POL" />
-                    </Grid>
-                    <Grid item>
-                        <StyledTypographyText>45</StyledTypographyText>
-                    </Grid>
-                </StyledGrid>
-                <StyledGrid container>
-                    <Grid item>
-                        <StyledIcon />
-                    </Grid>
-                    <Grid item>
-                        <StyledFlag code="ISR" />
-                    </Grid>
-                    <Grid item>
-                        <StyledTypographyText>50</StyledTypographyText>
-                    </Grid>
-                </StyledGrid>
+                {CURRENCIES.map((currency) => (
+                    <StyledGrid container key={currency.id}>
+                        <Grid item>
+                            <StyledIcon />
+                        </Grid>
+                        <Grid item>
+                            <StyledFlag code={currency.country} />
+                        </Grid>
+                        <Grid item>
+                            <StyledTypographyText>5</StyledTypographyText>
+                        </Grid>
+                    </StyledGrid>
+                ))}
             </Grid>
         </StyledBox>
     );
