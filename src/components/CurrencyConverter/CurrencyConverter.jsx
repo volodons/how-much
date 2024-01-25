@@ -1,3 +1,5 @@
+import { useDispatch, useSelector } from "react-redux";
+import convertCurrency from "../../utils/convertCurrency";
 import CURRENCIES from "../../const/currencies/currencies";
 import Flag from "react-world-flags";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
@@ -139,6 +141,26 @@ const StyledCurrencyExchangeIcon = styled(CurrencyExchangeIcon)`
 `;
 
 const CurrencyConverter = () => {
+    const dispatch = useDispatch();
+    const {
+        amountBeforeConversion,
+        amountAfterConversion,
+        baseCurrency,
+        targetCurrency,
+    } = useSelector((state) => state.exchangeRates);
+
+    const handleChangeAmountBeforeConversion = (amount) => {
+        dispatch({ type: "SET_AMOUNT_BEFORE_CONVERSION", payload: amount });
+    };
+
+    const handleChangeBaseCurrency = (currency) => {
+        dispatch({ type: "SET_BASE_CURRENCY", payload: currency });
+    };
+
+    const handleChangeTargetCurrency = (currency) => {
+        dispatch({ type: "SET_TARGET_CURRENCY", payload: currency });
+    };
+
     return (
         <StyledBox>
             <StyledTypographyHeading variant="h2">
@@ -152,12 +174,16 @@ const CurrencyConverter = () => {
                                 placeholder="Type in number"
                                 type="number"
                                 required
+                                defaultValue={amountBeforeConversion}
+                                onChange={(event, value) =>
+                                    handleChangeAmountBeforeConversion(value)
+                                }
                             />
                         </StyledGridItem>
                     </Grid>
                     <Grid item>
                         <Autocomplete
-                            defaultValue={CURRENCIES[0].currency}
+                            defaultValue={baseCurrency}
                             options={CURRENCIES}
                             getOptionLabel={(option) =>
                                 option.currency || CURRENCIES[0].currency
@@ -175,11 +201,14 @@ const CurrencyConverter = () => {
                                     {option.currency}
                                 </Box>
                             )}
+                            onChange={(event, value) =>
+                                handleChangeBaseCurrency(value)
+                            }
                         />
                     </Grid>
                     <Grid item>
                         <Autocomplete
-                            defaultValue={CURRENCIES[0].currency}
+                            defaultValue={targetCurrency}
                             options={CURRENCIES}
                             getOptionLabel={(option) =>
                                 option.currency || CURRENCIES[0].currency
@@ -197,10 +226,15 @@ const CurrencyConverter = () => {
                                     {option.currency}
                                 </Box>
                             )}
+                            onChange={(event, value) =>
+                                handleChangeTargetCurrency(value)
+                            }
                         />
                     </Grid>
                 </StyledInnerGridContainer>
-                <StyledIconButton>
+                <StyledIconButton
+                // onClick={() => console.log(convertCurrency(5, 10))} (ADD AMOUNTBEFORECONVERSION AND EXCHANGERATE INSTEAD OF 5 AND 10, AND DISPATCH RESULT INTO AMOUNTAFTERCONVERSION)
+                >
                     <StyledCurrencyExchangeIcon />
                     <StyledTypographyButton variant="button">
                         Convert
@@ -209,6 +243,7 @@ const CurrencyConverter = () => {
                 <StyledInnerGridContainer container>
                     <StyledGridItem item>
                         <StyledInput
+                            defaultValue={amountAfterConversion}
                             placeholder="Result"
                             type="number"
                             readOnly

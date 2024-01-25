@@ -26,7 +26,7 @@ const CURRENCIES = [
     },
     {
         id: 6,
-        currency: "CHY",
+        currency: "CNY",
         country: "CHN",
     },
     {

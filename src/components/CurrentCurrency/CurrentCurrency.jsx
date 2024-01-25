@@ -1,3 +1,4 @@
+import { useDispatch, useSelector } from "react-redux";
 import CURRENCIES from "../../const/currencies/currencies";
 import Flag from "react-world-flags";
 import Autocomplete from "@mui/material/Autocomplete";
@@ -87,11 +88,18 @@ const StyledFlag = styled(Flag)`
 `;
 
 const CurrentCurrency = () => {
+    const dispatch = useDispatch();
+    const { baseCurrency } = useSelector((state) => state.exchangeRates);
+
+    const handleChangeBaseCurrency = (currency) => {
+        dispatch({ type: "SET_BASE_CURRENCY", payload: currency });
+    };
+
     return (
         <StyledBox>
             <StyledTypography variant="h2">Current Currency</StyledTypography>
             <Autocomplete
-                defaultValue={CURRENCIES[0].currency}
+                defaultValue={baseCurrency}
                 options={CURRENCIES}
                 getOptionLabel={(option) =>
                     option.currency || CURRENCIES[0].currency
@@ -105,6 +113,7 @@ const CurrentCurrency = () => {
                         {option.currency}
                     </Box>
                 )}
+                onChange={(event, value) => handleChangeBaseCurrency(value)}
             />
         </StyledBox>
     );
