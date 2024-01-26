@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import convertCurrency from "../../utils/convertCurrency";
+import { exchangeRatesActions } from "../../ducks/exchangeRatesDuck";
 import CURRENCIES from "../../const/currencies/currencies";
 import Flag from "react-world-flags";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
@@ -150,15 +150,28 @@ const CurrencyConverter = () => {
     } = useSelector((state) => state.exchangeRates);
 
     const handleChangeAmountBeforeConversion = (amount) => {
-        dispatch({ type: "SET_AMOUNT_BEFORE_CONVERSION", payload: amount });
+        dispatch({
+            type: exchangeRatesActions.SET_AMOUNT_BEFORE_CONVERSION.type,
+            payload: parseFloat(amount),
+        });
     };
 
     const handleChangeBaseCurrency = (currency) => {
-        dispatch({ type: "SET_BASE_CURRENCY", payload: currency });
+        dispatch({
+            type: exchangeRatesActions.SET_BASE_CURRENCY.type,
+            payload: currency,
+        });
     };
 
     const handleChangeTargetCurrency = (currency) => {
-        dispatch({ type: "SET_TARGET_CURRENCY", payload: currency });
+        dispatch({
+            type: exchangeRatesActions.SET_TARGET_CURRENCY.type,
+            payload: currency,
+        });
+    };
+
+    const handleConvertCurrency = () => {
+        dispatch({ type: exchangeRatesActions.FETCH_EXCHANGE_RATES.type });
     };
 
     return (
@@ -174,19 +187,21 @@ const CurrencyConverter = () => {
                                 placeholder="Type in number"
                                 type="number"
                                 required
-                                defaultValue={amountBeforeConversion}
-                                onChange={(event, value) =>
-                                    handleChangeAmountBeforeConversion(value)
+                                value={amountBeforeConversion || ""}
+                                onChange={(event) =>
+                                    handleChangeAmountBeforeConversion(
+                                        event.target.value
+                                    )
                                 }
                             />
                         </StyledGridItem>
                     </Grid>
                     <Grid item>
                         <Autocomplete
-                            defaultValue={baseCurrency}
+                            value={baseCurrency || ""}
                             options={CURRENCIES}
                             getOptionLabel={(option) =>
-                                option.currency || CURRENCIES[0].currency
+                                option.currency || baseCurrency
                             }
                             renderInput={(params) => (
                                 <StyledTextFiled
@@ -202,16 +217,16 @@ const CurrencyConverter = () => {
                                 </Box>
                             )}
                             onChange={(event, value) =>
-                                handleChangeBaseCurrency(value)
+                                handleChangeBaseCurrency(value.currency)
                             }
                         />
                     </Grid>
                     <Grid item>
                         <Autocomplete
-                            defaultValue={targetCurrency}
+                            value={targetCurrency || ""}
                             options={CURRENCIES}
                             getOptionLabel={(option) =>
-                                option.currency || CURRENCIES[0].currency
+                                option.currency || targetCurrency
                             }
                             renderInput={(params) => (
                                 <StyledTextFiled
@@ -227,14 +242,12 @@ const CurrencyConverter = () => {
                                 </Box>
                             )}
                             onChange={(event, value) =>
-                                handleChangeTargetCurrency(value)
+                                handleChangeTargetCurrency(value.currency)
                             }
                         />
                     </Grid>
                 </StyledInnerGridContainer>
-                <StyledIconButton
-                // onClick={() => console.log(convertCurrency(5, 10))} (ADD AMOUNTBEFORECONVERSION AND EXCHANGERATE INSTEAD OF 5 AND 10, AND DISPATCH RESULT INTO AMOUNTAFTERCONVERSION)
-                >
+                <StyledIconButton onClick={handleConvertCurrency}>
                     <StyledCurrencyExchangeIcon />
                     <StyledTypographyButton variant="button">
                         Convert
@@ -243,7 +256,7 @@ const CurrencyConverter = () => {
                 <StyledInnerGridContainer container>
                     <StyledGridItem item>
                         <StyledInput
-                            defaultValue={amountAfterConversion}
+                            value={amountAfterConversion || ""}
                             placeholder="Result"
                             type="number"
                             readOnly

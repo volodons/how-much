@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { exchangeRatesActions } from "../../ducks/exchangeRatesDuck";
 import CURRENCIES from "../../const/currencies/currencies";
 import Flag from "react-world-flags";
 import Autocomplete from "@mui/material/Autocomplete";
@@ -92,18 +93,19 @@ const CurrentCurrency = () => {
     const { baseCurrency } = useSelector((state) => state.exchangeRates);
 
     const handleChangeBaseCurrency = (currency) => {
-        dispatch({ type: "SET_BASE_CURRENCY", payload: currency });
+        dispatch({
+            type: exchangeRatesActions.SET_BASE_CURRENCY.type,
+            payload: currency,
+        });
     };
 
     return (
         <StyledBox>
             <StyledTypography variant="h2">Current Currency</StyledTypography>
             <Autocomplete
-                defaultValue={baseCurrency}
+                value={baseCurrency || ""}
                 options={CURRENCIES}
-                getOptionLabel={(option) =>
-                    option.currency || CURRENCIES[0].currency
-                }
+                getOptionLabel={(option) => option.currency || baseCurrency}
                 renderInput={(params) => (
                     <StyledTextFiled {...params} label="Choose Your Currency" />
                 )}

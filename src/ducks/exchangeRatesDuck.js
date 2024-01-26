@@ -5,8 +5,8 @@ const exchangeRatesSlice = createSlice({
     initialState: {
         amountBeforeConversion: null,
         amountAfterConversion: null,
-        baseCurrency: null,
-        targetCurrency: null,
+        baseCurrency: "",
+        targetCurrency: "",
         exchangeRate: null,
     },
     reducers: {
@@ -26,9 +26,12 @@ const exchangeRatesSlice = createSlice({
             state.exchangeRate = action.payload;
         },
         FETCH_EXCHANGE_RATES: (state) => state,
+        FETCH_EXCHANGE_RATES_FAILURE: (state, action) => {
+            state.error = action.payload;
+        },
     },
 });
 
 const { actions, reducer } = exchangeRatesSlice;
 
-export { actions as exchangeRatesSlice, reducer as exchangeRatesReducer };
+export { actions as exchangeRatesActions, reducer as exchangeRatesReducer };

@@ -1,7 +1,10 @@
+import { useDispatch, useSelector } from "react-redux";
+import { favoriteCurrenciesActions } from "../../ducks/favoriteCurrenciesDuck";
 import CURRENCIES from "../../const/currencies/currencies";
 import Flag from "react-world-flags";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
@@ -62,13 +65,16 @@ const StyledTypographyText = styled(Typography)`
     }
 `;
 
+const StyledButton = styled(Button)`
+    &:hover {
+        opacity: 0.8;
+    }
+`;
+
 const StyledIcon = styled(StarOutlineIcon)`
     width: 3rem;
     height: 3rem;
     color: #ffd700;
-    &:hover {
-        opacity: 0.8;
-    }
 `;
 
 const StyledFlag = styled(Flag)`
@@ -83,16 +89,58 @@ const StyledFlag = styled(Flag)`
 `;
 
 const ExchangeRates = () => {
+    const dispatch = useDispatch();
+    const { favoriteCurrencies } = useSelector(
+        (state) => state.favoriteCurrencies
+    );
+
+    const handleAddToFavorites = (currency) => {
+        dispatch({
+            type: favoriteCurrenciesActions.ADD_TO_FAVORITES.type,
+            payload: currency,
+        });
+    };
+
+    const handleRemoveFromFavorites = (currency) => {
+        dispatch({
+            type: favoriteCurrenciesActions.REMOVE_FROM_FAVORITES.type,
+            payload: currency,
+        });
+    };
+
     return (
         <StyledBox>
             <StyledTypographyHeading variant="h2">
                 Exchange Rates
             </StyledTypographyHeading>
             <Grid container>
+                {favoriteCurrencies.map((currency) => (
+                    <StyledGrid container key={currency.id}>
+                        <Grid item>
+                            <StyledButton
+                                onClick={() =>
+                                    handleRemoveFromFavorites(currency)
+                                }
+                            >
+                                <StyledIcon />
+                            </StyledButton>
+                        </Grid>
+                        <Grid item>
+                            <StyledFlag code={currency.country} />
+                        </Grid>
+                        <Grid item>
+                            <StyledTypographyText>5</StyledTypographyText>
+                        </Grid>
+                    </StyledGrid>
+                ))}
                 {CURRENCIES.map((currency) => (
                     <StyledGrid container key={currency.id}>
                         <Grid item>
-                            <StyledIcon />
+                            <StyledButton
+                                onClick={() => handleAddToFavorites(currency)}
+                            >
+                                <StyledIcon />
+                            </StyledButton>
                         </Grid>
                         <Grid item>
                             <StyledFlag code={currency.country} />
