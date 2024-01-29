@@ -9,27 +9,30 @@ import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 
+import { COLORS } from "../const/styles";
+import { MEDIA_QUERIES } from "../const/styles";
+
 const StyledBox = styled(Box)`
     width: 50%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 2rem;
     padding: 2rem;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 2px 2px 4px ${COLORS.BLACK_MOST_TRANSPARENT};
     border-radius: 10px;
-    background: linear-gradient(to right, #0390fc, #562fff);
+    background: linear-gradient(to right, ${COLORS.BLUE}, ${COLORS.PURPLE});
     transition: box-shadow 0.3s ease-in-out;
     &:hover {
-        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+        box-shadow: 4px 4px 8px ${COLORS.BLACK_LEAST_TRANSPARENT};
         transform: scale(1.02);
     }
-    @media (max-width: 1000px) {
+    @media (max-width: ${MEDIA_QUERIES.L}) {
         width: 75%;
     }
-    @media (max-width: 800px) {
+    @media (max-width: ${MEDIA_QUERIES.S}) {
         width: 90%;
     }
-    @media (max-width: 600px) {
+    @media (max-width: ${MEDIA_QUERIES.XS}) {
         width: auto;
     }
 `;
@@ -42,25 +45,25 @@ const StyledGrid = styled(Grid)`
 const StyledTypographyHeading = styled(Typography)`
     margin-bottom: 2rem;
     text-align: center;
-    color: #f5f7ff;
+    color: ${COLORS.WHITE};
     text-decoration: underline;
     font-family: Lobster, sans-serif;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 2px 2px 4px ${COLORS.BLACK_MOST_TRANSPARENT};
     &:hover {
-        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+        text-shadow: 3px 3px 6px ${COLORS.BLACK_TRANSPARENT};
     }
-    @media (max-width: 600px) {
+    @media (max-width: ${MEDIA_QUERIES.XS}) {
         font-size: 2.5rem;
     }
 `;
 
 const StyledTypographyText = styled(Typography)`
     font-size: 3rem;
-    color: #f5f7ff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    color: ${COLORS.WHITE};
+    text-shadow: 2px 2px 4px ${COLORS.BLACK_MOST_TRANSPARENT};
     transition: color 0.3s ease-in-out;
     &:hover {
-        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+        text-shadow: 3px 3px 6px ${COLORS.BLACK_TRANSPARENT};
         opacity: 0.8;
     }
 `;
@@ -74,16 +77,16 @@ const StyledButton = styled(Button)`
 const StyledIcon = styled(StarOutlineIcon)`
     width: 3rem;
     height: 3rem;
-    color: #ffd700;
+    color: ${COLORS.YELLOW};
 `;
 
 const StyledFlag = styled(Flag)`
     width: 6rem;
     border-radius: 5px;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 2px 2px 4px ${COLORS.BLACK_MOST_TRANSPARENT};
     transition: color 0.3s ease-in-out;
     &:hover {
-        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+        box-shadow: 3px 3px 6px ${COLORS.BLACK_TRANSPARENT};
         opacity: 0.8;
     }
 `;

@@ -14,11 +14,14 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { styled } from "@mui/material/styles";
 
+import { COLORS } from "../const/styles";
+import { MEDIA_QUERIES } from "../const/styles";
+
 const StyledOpenButton = styled(Button)`
     position: absolute;
     margin-top: 1.5rem;
-    color: #f5f7ff;
-    @media (max-width: 600px) {
+    color: ${COLORS.WHITE};
+    @media (max-width: ${MEDIA_QUERIES.XS}) {
         position: static;
         margin-top: 0;
     }
@@ -29,18 +32,18 @@ const StyledOpenButtonIcon = styled(MenuIcon)`
 `;
 
 const StyledCloseButton = styled(Button)`
-    color: #f5f7ff;
+    color: ${COLORS.WHITE};
 `;
 
 const StyledCloseButtonIcon = styled(CloseIcon)`
     font-size: 2rem;
-    color: #f5f7ff;
+    color: ${COLORS.WHITE};
 `;
 
 const StyledDrawer = styled(Drawer)`
     & .MuiDrawer-paper {
         padding: 1rem;
-        background-color: #0390fc;
+        background-color: ${COLORS.BLUE};
     }
 `;
 
@@ -55,11 +58,11 @@ const StyledLink = styled(Link)`
 `;
 
 const StyledListBox = styled(Box)`
-    color: #f5f7ff;
+    color: ${COLORS.WHITE};
 `;
 
 const StyledListItemButton = styled(ListItemButton)`
-    border: 2px solid #f5f7ff;
+    border: 2px solid ${COLORS.WHITE};
     border-radius: 10px;
     width: 280px;
 `;
@@ -72,12 +75,12 @@ const StyledListItemText = styled(ListItemText)`
 
 const StyledCurrencyExchangeIcon = styled(CurrencyExchangeIcon)`
     font-size: 2rem;
-    color: #f5f7ff;
+    color: ${COLORS.WHITE};
 `;
 
 const StyledPriceChangeIcon = styled(PriceChangeIcon)`
     font-size: 2rem;
-    color: #f5f7ff;
+    color: ${COLORS.WHITE};
 `;
 
 const Navigation = () => {
