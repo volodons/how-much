@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
-import { favoriteCurrenciesActions } from "../ducks/favoriteCurrenciesDuck";
-import CURRENCIES from "../const/currencies";
-import Flag from "react-world-flags";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import Flag from "react-world-flags";
 
+import { favoriteCurrenciesActions } from "../ducks/favoriteCurrenciesDuck";
+import CURRENCIES from "../const/currencies";
 import { COLORS } from "../const/styles";
 import { MEDIA_QUERIES } from "../const/styles";
 

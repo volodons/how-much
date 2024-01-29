@@ -1,4 +1,5 @@
 import { combineReducers } from "@reduxjs/toolkit";
+
 import { exchangeRatesReducer } from "../ducks/exchangeRatesDuck";
 import { favoriteCurrenciesReducer } from "../ducks/favoriteCurrenciesDuck";
 

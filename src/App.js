@@ -1,9 +1,10 @@
-import "typeface-lobster";
+import { createGlobalStyle } from "styled-components";
 import { Provider } from "react-redux";
-import store from "./store/store";
+
 import AppRoutes from "./routes/routes";
 
-import { createGlobalStyle } from "styled-components";
+import store from "./store/store";
+import "typeface-lobster";
 import { COLORS } from "./const/styles";
 
 const GlobalAppStyles = createGlobalStyle`

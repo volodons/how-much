@@ -1,11 +1,12 @@
+import Box from "@mui/material/Box";
+import { styled } from "@mui/material/styles";
+
 import {
     CurrentCurrency,
     ExchangeRates,
     Navigation,
     Title,
 } from "../components/index";
-import Box from "@mui/material/Box";
-import { styled } from "@mui/material/styles";
 
 const StyledBox = styled(Box)`
     display: flex;

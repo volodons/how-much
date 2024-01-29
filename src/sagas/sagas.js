@@ -1,4 +1,5 @@
 import { call, put, takeLatest } from "redux-saga/effects";
+
 import { exchangeRatesActions } from "../ducks/exchangeRatesDuck";
 
 const apiCallFunction = () => console.log("Test API call");

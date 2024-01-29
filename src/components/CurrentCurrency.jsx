@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-import { exchangeRatesActions } from "../ducks/exchangeRatesDuck";
-import CURRENCIES from "../const/currencies";
-import Flag from "react-world-flags";
 import Autocomplete from "@mui/material/Autocomplete";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import Flag from "react-world-flags";
 
+import { exchangeRatesActions } from "../ducks/exchangeRatesDuck";
+import CURRENCIES from "../const/currencies";
 import { COLORS } from "../const/styles";
 import { MEDIA_QUERIES } from "../const/styles";
 
