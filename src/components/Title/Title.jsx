@@ -16,8 +16,6 @@ const StyledTypography = styled(Typography)`
     }
 `;
 
-const Title = () => {
-    return <StyledTypography variant="h1">How Much?</StyledTypography>;
-};
+const Title = () => <StyledTypography variant="h1">How Much?</StyledTypography>;
 
 export default Title;
