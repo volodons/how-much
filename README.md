@@ -2,13 +2,35 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## How to run this project?
 
-In the project directory, you can run:
+To get started with this project, follow these steps:
 
-### `npm start`
+1. Clone the repository:
 
-Runs the app in the development mode.\
+    ```bash
+    git clone https://github.com/volodons/how-much.git
+    ```
+
+2. Navigate to the project directory:
+
+    ```bash
+    cd how-much
+    ```
+
+3. Install dependecies:
+
+    ```bash
+    npm install
+    ```
+
+4. Start the development server:
+
+    ```bash
+    npm start
+    ```
+
+Last commands runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
