@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { exchangeRatesActions } from "../../ducks/exchangeRatesDuck";
-import CURRENCIES from "../../const/currencies/currencies";
+import { exchangeRatesActions } from "../ducks/exchangeRatesDuck";
+import CURRENCIES from "../const/currencies";
 import Flag from "react-world-flags";
 import Autocomplete from "@mui/material/Autocomplete";
 import Box from "@mui/material/Box";

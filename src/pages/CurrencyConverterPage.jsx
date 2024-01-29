@@ -1,6 +1,6 @@
-import CurrencyConverter from "../../components/CurrencyConverter/CurrencyConverter";
-import Navigation from "../../components/Navigation/Navigation";
-import Title from "../../components/Title/Title";
+import CurrencyConverter from "../components/CurrencyConverter";
+import Navigation from "../components/Navigation";
+import Title from "../components/Title";
 
 const CurrencyConverterPage = () => {
     return (

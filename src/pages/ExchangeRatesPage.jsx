@@ -1,9 +1,9 @@
-import CurrentCurrency from "../../components/CurrentCurrency/CurrentCurrency";
-import ExchangeRates from "../../components/ExchangeRates/ExchangeRates";
+import CurrentCurrency from "../components/CurrentCurrency";
+import ExchangeRates from "../components/ExchangeRates";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
-import Navigation from "../../components/Navigation/Navigation";
-import Title from "../../components/Title/Title";
+import Navigation from "../components/Navigation";
+import Title from "../components/Title";
 
 const StyledBox = styled(Box)`
     display: flex;
