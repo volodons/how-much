@@ -4,12 +4,12 @@ import createSagaMiddleware from 'redux-saga';
 import { all } from 'redux-saga/effects';
 
 import { exchangeRatesReducer } from '../ducks/exchangeRatesDuck';
-import { favoriteCurrenciesReducer } from '../ducks/favoriteCurrenciesDuck';
+import { currenciesReducer } from '../ducks/currenciesDuck';
 import { watchExchangeRates } from '../ducks/exchangeRatesDuck';
 
 const rootReducer = combineReducers({
     exchangeRates: exchangeRatesReducer,
-    favoriteCurrencies: favoriteCurrenciesReducer,
+    currencies: currenciesReducer,
 });
 
 function* rootSaga() {

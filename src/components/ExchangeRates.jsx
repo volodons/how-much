@@ -1,34 +1,37 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@mui/material/Grid';
 
-import { favoriteCurrenciesActions } from '../ducks/favoriteCurrenciesDuck';
-import CURRENCIES from '../const/currencies';
+import { currenciesActions } from '../ducks/currenciesDuck';
 import {
     StyledBox,
     StyledGrid,
     StyledTypographyHeading,
     StyledTypographyText,
     StyledButton,
-    StyledIcon,
+    StyledStarIcon,
+    StyledStarOutlineIcon,
     StyledFlag,
 } from '../styled/styledExchangeRates';
 
 const ExchangeRates = () => {
     const dispatch = useDispatch();
-    const { favoriteCurrencies } = useSelector(
-        (state) => state.favoriteCurrencies
+    const allCurrencies = useSelector(
+        (state) => state.currencies.allCurrencies
+    );
+    const featuredCurrencies = useSelector(
+        (state) => state.currencies.featuredCurrencies
     );
 
-    const handleAddToFavorites = (currency) => {
+    const handleAddToFeaturedCurrencies = (currency) => {
         dispatch({
-            type: favoriteCurrenciesActions.ADD_TO_FAVORITES.type,
+            type: currenciesActions.ADD_TO_FEATURED_CURRENCIES.type,
             payload: currency,
         });
     };
 
-    const handleRemoveFromFavorites = (currency) => {
+    const handleRemoveFromFeaturedCurrencies = (currency) => {
         dispatch({
-            type: favoriteCurrenciesActions.REMOVE_FROM_FAVORITES.type,
+            type: currenciesActions.REMOVE_FROM_FEATURED_CURRENCIES.type,
             payload: currency,
         });
     };
@@ -39,15 +42,15 @@ const ExchangeRates = () => {
                 Exchange Rates
             </StyledTypographyHeading>
             <Grid container>
-                {favoriteCurrencies.map((currency) => (
+                {featuredCurrencies.map((currency) => (
                     <StyledGrid container key={currency.id}>
                         <Grid item>
                             <StyledButton
                                 onClick={() =>
-                                    handleRemoveFromFavorites(currency)
+                                    handleRemoveFromFeaturedCurrencies(currency)
                                 }
                             >
-                                <StyledIcon />
+                                <StyledStarIcon />
                             </StyledButton>
                         </Grid>
                         <Grid item>
@@ -58,13 +61,15 @@ const ExchangeRates = () => {
                         </Grid>
                     </StyledGrid>
                 ))}
-                {CURRENCIES.map((currency) => (
+                {allCurrencies.map((currency) => (
                     <StyledGrid container key={currency.id}>
                         <Grid item>
                             <StyledButton
-                                onClick={() => handleAddToFavorites(currency)}
+                                onClick={() =>
+                                    handleAddToFeaturedCurrencies(currency)
+                                }
                             >
-                                <StyledIcon />
+                                <StyledStarOutlineIcon />
                             </StyledButton>
                         </Grid>
                         <Grid item>

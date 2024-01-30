@@ -38,18 +38,22 @@ const apiCallFunction = () => console.log('Test API call');
 function* fetchExchangeRatesSaga(action) {
     try {
         const response = yield call(apiCallFunction, action.payload);
-        yield put(exchangeRatesSlice.SET_EXCHANGE_RATE(response.data));
+        yield put(exchangeRatesActions.SET_EXCHANGE_RATE(response.data));
     } catch (error) {
         yield put(
-            exchangeRatesSlice.FETCH_EXCHANGE_RATES_FAILURE(error.message)
+            exchangeRatesActions.FETCH_EXCHANGE_RATES_FAILURE(error.message)
         );
     }
 }
 
 export function* watchExchangeRates() {
-    yield takeLatest(exchangeRatesSlice, fetchExchangeRatesSaga);
+    yield takeLatest(
+        exchangeRatesActions.FETCH_EXCHANGE_RATES,
+        fetchExchangeRatesSaga
+    );
 }
 
 const { actions, reducer } = exchangeRatesSlice;
 
-export { actions as exchangeRatesActions, reducer as exchangeRatesReducer };
+export const exchangeRatesActions = actions;
+export const exchangeRatesReducer = reducer;

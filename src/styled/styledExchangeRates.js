@@ -1,3 +1,4 @@
+import StarIcon from '@mui/icons-material/Star';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -71,10 +72,16 @@ export const StyledButton = styled(Button)`
     }
 `;
 
-export const StyledIcon = styled(StarOutlineIcon)`
+export const StyledStarIcon = styled(StarIcon)`
     width: 3rem;
     height: 3rem;
-    color: ${COLORS.YELLOW};
+    color: ${COLORS.GOLD};
+`;
+
+export const StyledStarOutlineIcon = styled(StarOutlineIcon)`
+    width: 3rem;
+    height: 3rem;
+    color: ${COLORS.GOLD};
 `;
 
 export const StyledFlag = styled(Flag)`

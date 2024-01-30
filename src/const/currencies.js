@@ -1,4 +1,4 @@
-const CURRENCIES = [
+const ALL_CURRENCIES = [
     {
         id: 1,
         currency: 'UAH',
@@ -56,4 +56,4 @@ const CURRENCIES = [
     },
 ];
 
-export default CURRENCIES;
+export default ALL_CURRENCIES;
