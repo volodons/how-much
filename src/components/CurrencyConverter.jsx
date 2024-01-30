@@ -4,7 +4,6 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
 import { exchangeRatesActions } from '../ducks/exchangeRatesDuck';
-import CURRENCIES from '../const/currencies';
 import {
     StyledTypographyHeading,
     StyledTypographyButton,
@@ -27,6 +26,9 @@ const CurrencyConverter = () => {
         baseCurrency,
         targetCurrency,
     } = useSelector((state) => state.exchangeRates);
+    const allCurrencies = useSelector(
+        (state) => state.currencies.allCurrencies
+    );
 
     const handleChangeAmountBeforeConversion = (amount) => {
         dispatch({
@@ -78,7 +80,7 @@ const CurrencyConverter = () => {
                     <Grid item>
                         <Autocomplete
                             value={baseCurrency || ''}
-                            options={CURRENCIES}
+                            options={allCurrencies}
                             getOptionLabel={(option) =>
                                 option.currency || baseCurrency
                             }
@@ -103,7 +105,7 @@ const CurrencyConverter = () => {
                     <Grid item>
                         <Autocomplete
                             value={targetCurrency || ''}
-                            options={CURRENCIES}
+                            options={allCurrencies}
                             getOptionLabel={(option) =>
                                 option.currency || targetCurrency
                             }

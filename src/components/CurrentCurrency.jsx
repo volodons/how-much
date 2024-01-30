@@ -1,9 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
 
-import { exchangeRatesActions } from '../ducks/exchangeRatesDuck';
-import CURRENCIES from '../const/currencies';
 import {
     StyledBox,
     StyledTypography,
@@ -12,23 +11,28 @@ import {
 } from '../styled/styledCurrentCurrency';
 
 const CurrentCurrency = () => {
-    const dispatch = useDispatch();
-    const { baseCurrency } = useSelector((state) => state.exchangeRates);
+    const allCurrencies = useSelector(
+        (state) => state.currencies.allCurrencies
+    );
+    const [selectedCurrency, setSelectedCurrency] = useState('');
 
-    const handleChangeBaseCurrency = (currency) => {
-        dispatch({
-            type: exchangeRatesActions.SET_BASE_CURRENCY.type,
-            payload: currency,
-        });
+    const handleChangeSelectedCurrency = (currency) => {
+        setSelectedCurrency(currency);
+    };
+
+    const handleInputChange = (value) => {
+        if (!value) {
+            setSelectedCurrency('');
+        }
     };
 
     return (
         <StyledBox>
             <StyledTypography variant="h2">Current Currency</StyledTypography>
             <Autocomplete
-                value={baseCurrency || ''}
-                options={CURRENCIES}
-                getOptionLabel={(option) => option.currency || baseCurrency}
+                value={selectedCurrency || ''}
+                options={allCurrencies}
+                getOptionLabel={(option) => option.currency || selectedCurrency}
                 renderInput={(params) => (
                     <StyledTextField {...params} label="Choose Your Currency" />
                 )}
@@ -38,7 +42,8 @@ const CurrentCurrency = () => {
                         {option.currency}
                     </Box>
                 )}
-                onChange={(event, value) => handleChangeBaseCurrency(value)}
+                onChange={(event, value) => handleChangeSelectedCurrency(value)}
+                onInputChange={(event, value) => handleInputChange(value)}
             />
         </StyledBox>
     );

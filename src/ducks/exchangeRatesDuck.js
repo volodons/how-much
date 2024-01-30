@@ -1,15 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
+const initialState = {
+    amountBeforeConversion: null,
+    amountAfterConversion: null,
+    baseCurrency: '',
+    targetCurrency: '',
+    exchangeRate: null,
+    error: null,
+};
+
 const exchangeRatesSlice = createSlice({
     name: 'Exchange Rates',
-    initialState: {
-        amountBeforeConversion: null,
-        amountAfterConversion: null,
-        baseCurrency: '',
-        targetCurrency: '',
-        exchangeRate: null,
-    },
+    initialState,
     reducers: {
         SET_AMOUNT_BEFORE_CONVERSION: (state, action) => {
             state.amountBeforeConversion = action.payload;

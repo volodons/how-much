@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@mui/material/Grid';
 
@@ -36,6 +37,10 @@ const ExchangeRates = () => {
         });
     };
 
+    useEffect(() => {
+        dispatch(currenciesActions.FETCH_ALL_CURRENCIES());
+    }, []);
+
     return (
         <StyledBox>
             <StyledTypographyHeading variant="h2">
@@ -54,10 +59,10 @@ const ExchangeRates = () => {
                             </StyledButton>
                         </Grid>
                         <Grid item>
-                            <StyledFlag code={currency.country} />
-                        </Grid>
-                        <Grid item>
-                            <StyledTypographyText>5</StyledTypographyText>
+                            <StyledTypographyText>
+                                {currency.exchangeRate} {currency.currency} {''}{' '}
+                                <StyledFlag code="UKR" />
+                            </StyledTypographyText>
                         </Grid>
                     </StyledGrid>
                 ))}
@@ -73,10 +78,11 @@ const ExchangeRates = () => {
                             </StyledButton>
                         </Grid>
                         <Grid item>
-                            <StyledFlag code={currency.country} />
-                        </Grid>
-                        <Grid item>
-                            <StyledTypographyText>5</StyledTypographyText>
+                            <StyledTypographyText>
+                                {currency.exchangeRate} {currency.currency}
+                                {''}
+                                <StyledFlag code="UKR" />
+                            </StyledTypographyText>
                         </Grid>
                     </StyledGrid>
                 ))}
