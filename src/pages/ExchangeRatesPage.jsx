@@ -14,17 +14,15 @@ const StyledBox = styled(Box)`
     align-items: center;
 `;
 
-const ExchangeRatesPage = () => {
-    return (
-        <>
-            <Navigation />
-            <Title />
-            <StyledBox>
-                <CurrentCurrency />
-                <ExchangeRates />
-            </StyledBox>
-        </>
-    );
-};
+const ExchangeRatesPage = () => (
+    <>
+        <Navigation />
+        <Title />
+        <StyledBox>
+            <CurrentCurrency />
+            <ExchangeRates />
+        </StyledBox>
+    </>
+);
 
 export default ExchangeRatesPage;

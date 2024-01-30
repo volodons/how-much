@@ -13,15 +13,13 @@ const GlobalAppStyles = createGlobalStyle`
     }
 `;
 
-const App = () => {
-    return (
-        <>
-            <Provider store={store}>
-                <GlobalAppStyles />
-                <AppRoutes />
-            </Provider>
-        </>
-    );
-};
+const App = () => (
+    <>
+        <Provider store={store}>
+            <GlobalAppStyles />
+            <AppRoutes />
+        </Provider>
+    </>
+);
 
 export default App;
