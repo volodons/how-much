@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import { Provider } from 'react-redux';
 
-import AppRoutes from './routes/routes';
+import AppRoutes from './routes';
 
 import store from './store/store';
 import 'typeface-lobster';
