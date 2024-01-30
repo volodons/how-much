@@ -6,8 +6,8 @@ import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Flag from 'react-world-flags';
 
-import { COLORS } from '../const/styles';
-import { MEDIA_QUERIES } from '../const/styles';
+import { COLORS } from '../styles';
+import { MEDIA_QUERIES } from '../styles';
 
 export const StyledBox = styled(Box)`
     width: 50%;

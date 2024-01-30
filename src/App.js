@@ -1,22 +1,14 @@
-import { createGlobalStyle } from 'styled-components';
 import { Provider } from 'react-redux';
 
 import AppRoutes from './routes';
 
 import store from './store/store';
-import 'typeface-lobster';
-import { COLORS } from './const/styles';
-
-const GlobalAppStyles = createGlobalStyle`
-    html, body {
-        background: linear-gradient(to right, ${COLORS.BLUE}, ${COLORS.PURPLE});
-    }
-`;
+import { StyledApp } from './styled/styledApp';
 
 const App = () => (
     <>
         <Provider store={store}>
-            <GlobalAppStyles />
+            <StyledApp />
             <AppRoutes />
         </Provider>
     </>

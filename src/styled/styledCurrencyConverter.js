@@ -8,8 +8,8 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Flag from 'react-world-flags';
 
-import { COLORS } from '../const/styles';
-import { MEDIA_QUERIES } from '../const/styles';
+import { COLORS } from '../styles';
+import { MEDIA_QUERIES } from '../styles';
 
 export const StyledTypographyHeading = styled(Typography)`
     margin-bottom: 2rem;
