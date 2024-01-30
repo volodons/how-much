@@ -1,4 +1,4 @@
-import { CurrencyConverter, Navigation, Title } from "../components/index";
+import { CurrencyConverter, Navigation, Title } from '../components/index';
 
 const CurrencyConverterPage = () => {
     return (

@@ -1,19 +1,19 @@
-import { useDispatch, useSelector } from "react-redux";
-import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
-import Autocomplete from "@mui/material/Autocomplete";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import IconButton from "@mui/material/IconButton";
-import Input from "@mui/material/Input";
-import { styled } from "@mui/material/styles";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import Flag from "react-world-flags";
+import { useDispatch, useSelector } from 'react-redux';
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+import Autocomplete from '@mui/material/Autocomplete';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import Input from '@mui/material/Input';
+import { styled } from '@mui/material/styles';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import Flag from 'react-world-flags';
 
-import { exchangeRatesActions } from "../ducks/exchangeRatesDuck";
-import CURRENCIES from "../const/currencies";
-import { COLORS } from "../const/styles";
-import { MEDIA_QUERIES } from "../const/styles";
+import { exchangeRatesActions } from '../ducks/exchangeRatesDuck';
+import CURRENCIES from '../const/currencies';
+import { COLORS } from '../const/styles';
+import { MEDIA_QUERIES } from '../const/styles';
 
 const StyledTypographyHeading = styled(Typography)`
     margin-bottom: 2rem;
@@ -190,7 +190,7 @@ const CurrencyConverter = () => {
                                 placeholder="Type in number"
                                 type="number"
                                 required
-                                value={amountBeforeConversion || ""}
+                                value={amountBeforeConversion || ''}
                                 onChange={(event) =>
                                     handleChangeAmountBeforeConversion(
                                         event.target.value
@@ -201,7 +201,7 @@ const CurrencyConverter = () => {
                     </Grid>
                     <Grid item>
                         <Autocomplete
-                            value={baseCurrency || ""}
+                            value={baseCurrency || ''}
                             options={CURRENCIES}
                             getOptionLabel={(option) =>
                                 option.currency || baseCurrency
@@ -226,7 +226,7 @@ const CurrencyConverter = () => {
                     </Grid>
                     <Grid item>
                         <Autocomplete
-                            value={targetCurrency || ""}
+                            value={targetCurrency || ''}
                             options={CURRENCIES}
                             getOptionLabel={(option) =>
                                 option.currency || targetCurrency
@@ -259,7 +259,7 @@ const CurrencyConverter = () => {
                 <StyledInnerGridContainer container>
                     <StyledGridItem item>
                         <StyledInput
-                            value={amountAfterConversion || ""}
+                            value={amountAfterConversion || ''}
                             placeholder="Result"
                             type="number"
                             readOnly

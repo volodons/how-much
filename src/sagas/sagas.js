@@ -1,8 +1,8 @@
-import { call, put, takeLatest } from "redux-saga/effects";
+import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { exchangeRatesActions } from "../ducks/exchangeRatesDuck";
+import { exchangeRatesActions } from '../ducks/exchangeRatesDuck';
 
-const apiCallFunction = () => console.log("Test API call");
+const apiCallFunction = () => console.log('Test API call');
 
 function* fetchExchangeRatesSaga(action) {
     try {

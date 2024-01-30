@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const favoriteCurrenciesSlice = createSlice({
-    name: "Favorite Currencies",
+    name: 'Favorite Currencies',
     initialState: {
         favoriteCurrencies: [],
     },

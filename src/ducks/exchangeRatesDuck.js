@@ -1,12 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const exchangeRatesSlice = createSlice({
-    name: "Exchange Rates",
+    name: 'Exchange Rates',
     initialState: {
         amountBeforeConversion: null,
         amountAfterConversion: null,
-        baseCurrency: "",
-        targetCurrency: "",
+        baseCurrency: '',
+        targetCurrency: '',
         exchangeRate: null,
     },
     reducers: {
