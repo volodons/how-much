@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { call, put, takeLatest } from 'redux-saga/effects';
 
 const exchangeRatesSlice = createSlice({
     name: 'Exchange Rates',
@@ -31,6 +32,23 @@ const exchangeRatesSlice = createSlice({
         },
     },
 });
+
+const apiCallFunction = () => console.log('Test API call');
+
+function* fetchExchangeRatesSaga(action) {
+    try {
+        const response = yield call(apiCallFunction, action.payload);
+        yield put(exchangeRatesSlice.SET_EXCHANGE_RATE(response.data));
+    } catch (error) {
+        yield put(
+            exchangeRatesSlice.FETCH_EXCHANGE_RATES_FAILURE(error.message)
+        );
+    }
+}
+
+export function* watchExchangeRates() {
+    yield takeLatest(exchangeRatesSlice, fetchExchangeRatesSaga);
+}
 
 const { actions, reducer } = exchangeRatesSlice;
 
