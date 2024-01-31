@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import CurrencyConverterPage from './pages/CurrencyConverterPage';
+import ExchangeRatesPage from './pages/ExchangeRatesPage';
+
+import store from './redux';
+import { StyledApp } from './styled/styledApp';
+
+const App = () => (
+    <>
+        <Provider store={store}>
+            <StyledApp />
+            <Router>
+                <Routes>
+                    <Route path="/" element={<CurrencyConverterPage />} />
+                    <Route path="/rates" element={<ExchangeRatesPage />} />
+                </Routes>
+            </Router>
+        </Provider>
+    </>
+);
 
 export default App;
