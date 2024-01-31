@@ -6,7 +6,7 @@ import {
     ExchangeRates,
     Navigation,
     Title,
-} from '../components/index';
+} from '../components';
 
 const StyledBox = styled(Box)`
     display: flex;

@@ -2,7 +2,7 @@ import { Provider } from 'react-redux';
 
 import AppRoutes from './routes';
 
-import store from './redux/index';
+import store from './redux';
 import { StyledApp } from './styled/styledApp';
 
 const App = () => (
