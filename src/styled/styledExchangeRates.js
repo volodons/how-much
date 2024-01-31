@@ -22,7 +22,7 @@ export const StyledBox = styled(Box)`
     transition: box-shadow 0.3s ease-in-out;
     &:hover {
         box-shadow: 4px 4px 8px ${COLORS.BLACK_LEAST_TRANSPARENT};
-        transform: scale(1.02);
+        transform: scale(1.001);
     }
     @media (max-width: ${MEDIA_QUERIES.L}) {
         width: 75%;

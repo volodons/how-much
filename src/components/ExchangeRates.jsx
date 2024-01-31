@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@mui/material/Grid';
 
-import { currenciesActions } from '../ducks/currenciesDuck';
+import { currenciesActions } from '../redux/ducks/currenciesDuck';
 import {
     StyledBox,
     StyledGrid,
@@ -60,7 +60,7 @@ const ExchangeRates = () => {
                         </Grid>
                         <Grid item>
                             <StyledTypographyText>
-                                {currency.exchangeRate} {currency.currency} {''}{' '}
+                                {currency.exchangeRate} {currency.currency}{' '}
                                 <StyledFlag code="UKR" />
                             </StyledTypographyText>
                         </Grid>
@@ -79,8 +79,7 @@ const ExchangeRates = () => {
                         </Grid>
                         <Grid item>
                             <StyledTypographyText>
-                                {currency.exchangeRate} {currency.currency}
-                                {''}
+                                {currency.exchangeRate} {currency.currency}{' '}
                                 <StyledFlag code="UKR" />
                             </StyledTypographyText>
                         </Grid>

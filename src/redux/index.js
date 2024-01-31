@@ -3,11 +3,11 @@ import { combineReducers } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import { all } from 'redux-saga/effects';
 
-import { currenciesReducer, watchAllCurrencies } from '../ducks/currenciesDuck';
+import { currenciesReducer, watchAllCurrencies } from './ducks/currenciesDuck';
 import {
     exchangeRatesReducer,
     watchExchangeRates,
-} from '../ducks/exchangeRatesDuck';
+} from './ducks/exchangeRatesDuck';
 
 const rootReducer = combineReducers({
     currencies: currenciesReducer,

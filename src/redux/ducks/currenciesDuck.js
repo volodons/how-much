@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { fetchAllCurrencies } from '../api';
+import { fetchAllCurrencies } from '../../api';
 
 const initialState = {
     allCurrencies: [],

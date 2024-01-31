@@ -3,7 +3,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
-import { exchangeRatesActions } from '../ducks/exchangeRatesDuck';
+import { exchangeRatesActions } from '../redux/ducks/exchangeRatesDuck';
 import {
     StyledTypographyHeading,
     StyledTypographyButton,
