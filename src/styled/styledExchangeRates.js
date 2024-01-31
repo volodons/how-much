@@ -5,7 +5,6 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import Flag from 'react-world-flags';
 
 import { COLORS } from '../styles';
 import { MEDIA_QUERIES } from '../styles';
@@ -82,15 +81,4 @@ export const StyledStarOutlineIcon = styled(StarOutlineIcon)`
     width: 3rem;
     height: 3rem;
     color: ${COLORS.GOLD};
-`;
-
-export const StyledFlag = styled(Flag)`
-    width: 6rem;
-    border-radius: 5px;
-    box-shadow: 2px 2px 4px ${COLORS.BLACK_MOST_TRANSPARENT};
-    transition: color 0.3s ease-in-out;
-    &:hover {
-        box-shadow: 3px 3px 6px ${COLORS.BLACK_TRANSPARENT};
-        opacity: 0.8;
-    }
 `;

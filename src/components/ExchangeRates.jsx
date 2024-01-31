@@ -11,7 +11,6 @@ import {
     StyledButton,
     StyledStarIcon,
     StyledStarOutlineIcon,
-    StyledFlag,
 } from '../styled/styledExchangeRates';
 
 const ExchangeRates = () => {
@@ -61,7 +60,6 @@ const ExchangeRates = () => {
                         <Grid item>
                             <StyledTypographyText>
                                 {currency.exchangeRate} {currency.currency}{' '}
-                                <StyledFlag code="UKR" />
                             </StyledTypographyText>
                         </Grid>
                     </StyledGrid>
@@ -80,7 +78,6 @@ const ExchangeRates = () => {
                         <Grid item>
                             <StyledTypographyText>
                                 {currency.exchangeRate} {currency.currency}{' '}
-                                <StyledFlag code="UKR" />
                             </StyledTypographyText>
                         </Grid>
                     </StyledGrid>

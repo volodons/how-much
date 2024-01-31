@@ -6,7 +6,6 @@ import Input from '@mui/material/Input';
 import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import Flag from 'react-world-flags';
 
 import { COLORS } from '../styles';
 import { MEDIA_QUERIES } from '../styles';
@@ -126,12 +125,6 @@ export const StyledIconButton = styled(IconButton)`
     &:hover {
         box-shadow: 3px 3px 6px ${COLORS.BLACK_TRANSPARENT};
     }
-`;
-
-export const StyledFlag = styled(Flag)`
-    width: 2rem;
-    height: 2rem;
-    margin-right: 1rem;
 `;
 
 export const StyledCurrencyExchangeIcon = styled(CurrencyExchangeIcon)`

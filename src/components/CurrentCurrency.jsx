@@ -7,7 +7,6 @@ import {
     StyledBox,
     StyledTypography,
     StyledTextField,
-    StyledFlag,
 } from '../styled/styledCurrentCurrency';
 
 const CurrentCurrency = () => {
@@ -38,7 +37,6 @@ const CurrentCurrency = () => {
                 )}
                 renderOption={(props, option) => (
                     <Box component="li" {...props}>
-                        <StyledFlag code={option.country} />
                         {option.currency}
                     </Box>
                 )}

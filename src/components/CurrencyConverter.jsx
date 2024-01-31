@@ -14,7 +14,6 @@ import {
     StyledInput,
     StyledTextFiled,
     StyledIconButton,
-    StyledFlag,
     StyledCurrencyExchangeIcon,
 } from '../styled/styledCurrencyConverter';
 
@@ -93,7 +92,6 @@ const CurrencyConverter = () => {
                             )}
                             renderOption={(props, option) => (
                                 <Box component="li" {...props}>
-                                    <StyledFlag code={option.country} />
                                     {option.currency}
                                 </Box>
                             )}
@@ -118,7 +116,6 @@ const CurrencyConverter = () => {
                             )}
                             renderOption={(props, option) => (
                                 <Box component="li" {...props}>
-                                    <StyledFlag code={option.country} />
                                     {option.currency}
                                 </Box>
                             )}

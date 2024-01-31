@@ -2,7 +2,6 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import Flag from 'react-world-flags';
 
 import { COLORS } from '../styles';
 import { MEDIA_QUERIES } from '../styles';
@@ -79,10 +78,4 @@ export const StyledTextField = styled(TextField)`
             border-color: ${COLORS.WHITE};
         }
     }
-`;
-
-export const StyledFlag = styled(Flag)`
-    width: 2rem;
-    height: 2rem;
-    margin-right: 1rem;
 `;
