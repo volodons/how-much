@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
 
@@ -8,20 +7,28 @@ import {
     StyledTypography,
     StyledTextField,
 } from '../styled/styledCurrentCurrency';
+import { currenciesActions } from '../redux/ducks/currenciesDuck';
 
 const CurrentCurrency = () => {
+    const dispatch = useDispatch();
     const allCurrencies = useSelector(
         (state) => state.currencies.allCurrencies
     );
-    const [selectedCurrency, setSelectedCurrency] = useState('');
+    const baseCurrency = useSelector((state) => state.currencies.baseCurrency);
 
     const handleChangeSelectedCurrency = (currency) => {
-        setSelectedCurrency(currency);
+        dispatch({
+            type: currenciesActions.SET_BASE_CURRENCY.type,
+            payload: currency.code,
+        });
     };
 
     const handleInputChange = (value) => {
         if (!value) {
-            setSelectedCurrency('');
+            dispatch({
+                type: currenciesActions.SET_BASE_CURRENCY.type,
+                payload: value,
+            });
         }
     };
 
@@ -29,15 +36,15 @@ const CurrentCurrency = () => {
         <StyledBox>
             <StyledTypography variant="h2">Current Currency</StyledTypography>
             <Autocomplete
-                value={selectedCurrency || ''}
+                value={baseCurrency || ''}
                 options={allCurrencies}
-                getOptionLabel={(option) => option.currency || selectedCurrency}
+                getOptionLabel={(option) => option.code || baseCurrency}
                 renderInput={(params) => (
                     <StyledTextField {...params} label="Choose Your Currency" />
                 )}
                 renderOption={(props, option) => (
                     <Box component="li" {...props}>
-                        {option.currency}
+                        {option.code}
                     </Box>
                 )}
                 onChange={(event, value) => handleChangeSelectedCurrency(value)}
