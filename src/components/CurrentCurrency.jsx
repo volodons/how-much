@@ -17,17 +17,15 @@ const CurrentCurrency = () => {
     const baseCurrency = useSelector((state) => state.currencies.baseCurrency);
 
     const handleChangeSelectedCurrency = (currency) => {
-        dispatch({
-            type: currenciesActions.SET_BASE_CURRENCY.type,
-            payload: currency.code,
-        });
-    };
-
-    const handleInputChange = (value) => {
-        if (!value) {
+        if (currency) {
             dispatch({
                 type: currenciesActions.SET_BASE_CURRENCY.type,
-                payload: value,
+                payload: currency.code,
+            });
+        } else {
+            dispatch({
+                type: currenciesActions.SET_BASE_CURRENCY.type,
+                payload: '',
             });
         }
     };
@@ -48,7 +46,6 @@ const CurrentCurrency = () => {
                     </Box>
                 )}
                 onChange={(event, value) => handleChangeSelectedCurrency(value)}
-                onInputChange={(event, value) => handleInputChange(value)}
             />
         </StyledBox>
     );
