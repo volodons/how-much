@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { fetchAllCurrencies, fetchExchangeRates } from '../../api';
+import { fetchAllExchangeRatesCurrencies, fetchExchangeRates } from '../../api';
 
 const initialState = {
     allCurrencies: [],
@@ -68,7 +68,7 @@ const currenciesSlice = createSlice({
 
 function* fetchAllCurrenciesSaga() {
     try {
-        const response = yield call(fetchAllCurrencies);
+        const response = yield call(fetchAllExchangeRatesCurrencies);
         yield put(currenciesActions.SET_ALL_CURRENCIES(response));
     } catch (error) {
         yield put(

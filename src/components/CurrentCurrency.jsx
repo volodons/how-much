@@ -34,7 +34,7 @@ const CurrentCurrency = () => {
         <StyledBox>
             <StyledTypography variant="h2">Current Currency</StyledTypography>
             <Autocomplete
-                value={baseCurrency || ''}
+                value={baseCurrency}
                 options={allCurrencies}
                 getOptionLabel={(option) => option.code || baseCurrency}
                 renderInput={(params) => (

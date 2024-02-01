@@ -1,9 +1,10 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
-import { exchangeRatesActions } from '../redux/ducks/exchangeRatesDuck';
+import { converterActions } from '../redux/ducks/converterDuck';
 import {
     StyledTypographyHeading,
     StyledTypographyButton,
@@ -20,39 +21,60 @@ import {
 const CurrencyConverter = () => {
     const dispatch = useDispatch();
     const {
-        amountBeforeConversion,
-        amountAfterConversion,
+        allCurrencies,
         baseCurrency,
+        baseCurrencyAmount,
         targetCurrency,
-    } = useSelector((state) => state.exchangeRates);
-    const allCurrencies = useSelector(
-        (state) => state.currencies.allCurrencies
-    );
-
-    const handleChangeAmountBeforeConversion = (amount) => {
-        dispatch({
-            type: exchangeRatesActions.SET_AMOUNT_BEFORE_CONVERSION.type,
-            payload: parseFloat(amount),
-        });
-    };
+        targetCurrencyAmount,
+    } = useSelector((state) => state.converter);
 
     const handleChangeBaseCurrency = (currency) => {
-        dispatch({
-            type: exchangeRatesActions.SET_BASE_CURRENCY.type,
-            payload: currency,
-        });
+        if (currency) {
+            dispatch({
+                type: converterActions.SET_BASE_CURRENCY.type,
+                payload: currency.code,
+            });
+        } else {
+            dispatch({
+                type: converterActions.SET_BASE_CURRENCY.type,
+                payload: '',
+            });
+        }
+    };
+
+    const handleChangeBaseCurrencyAmount = (amount) => {
+        if (amount >= 0) {
+            dispatch({
+                type: converterActions.SET_BASE_CURRENCY_AMOUNT.type,
+                payload: amount,
+            });
+        }
     };
 
     const handleChangeTargetCurrency = (currency) => {
-        dispatch({
-            type: exchangeRatesActions.SET_TARGET_CURRENCY.type,
-            payload: currency,
-        });
+        if (currency) {
+            dispatch({
+                type: converterActions.SET_TARGET_CURRENCY.type,
+                payload: currency.code,
+            });
+        } else {
+            dispatch({
+                type: converterActions.SET_TARGET_CURRENCY.type,
+                payload: '',
+            });
+        }
     };
 
     const handleConvertCurrency = () => {
-        dispatch({ type: exchangeRatesActions.FETCH_EXCHANGE_RATES.type });
+        dispatch({
+            type: converterActions.FETCH_EXCHANGE_RATE.type,
+            payload: { baseCurrency, targetCurrency },
+        });
     };
+
+    useEffect(() => {
+        dispatch({ type: converterActions.FETCH_ALL_CURRENCIES.type });
+    }, []);
 
     return (
         <StyledBox>
@@ -67,9 +89,9 @@ const CurrencyConverter = () => {
                                 placeholder="Type in number"
                                 type="number"
                                 required
-                                value={amountBeforeConversion || ''}
+                                value={baseCurrencyAmount}
                                 onChange={(event) =>
-                                    handleChangeAmountBeforeConversion(
+                                    handleChangeBaseCurrencyAmount(
                                         event.target.value
                                     )
                                 }
@@ -78,49 +100,49 @@ const CurrencyConverter = () => {
                     </Grid>
                     <Grid item>
                         <Autocomplete
-                            value={baseCurrency || ''}
+                            value={baseCurrency}
                             options={allCurrencies}
                             getOptionLabel={(option) =>
-                                option.currency || baseCurrency
+                                option.code || baseCurrency
                             }
                             renderInput={(params) => (
                                 <StyledTextFiled
                                     {...params}
-                                    label="Choose Currency To Convert"
+                                    label="Choose Currency To Convert From"
                                     required
                                 />
                             )}
                             renderOption={(props, option) => (
                                 <Box component="li" {...props}>
-                                    {option.currency}
+                                    {option.code}
                                 </Box>
                             )}
                             onChange={(event, value) =>
-                                handleChangeBaseCurrency(value.currency)
+                                handleChangeBaseCurrency(value)
                             }
                         />
                     </Grid>
                     <Grid item>
                         <Autocomplete
-                            value={targetCurrency || ''}
+                            value={targetCurrency}
                             options={allCurrencies}
                             getOptionLabel={(option) =>
-                                option.currency || targetCurrency
+                                option.code || targetCurrency
                             }
                             renderInput={(params) => (
                                 <StyledTextFiled
                                     {...params}
-                                    label="Choose Currency To Convert Into"
+                                    label="Choose Currency To Convert To"
                                     required
                                 />
                             )}
                             renderOption={(props, option) => (
                                 <Box component="li" {...props}>
-                                    {option.currency}
+                                    {option.code}
                                 </Box>
                             )}
                             onChange={(event, value) =>
-                                handleChangeTargetCurrency(value.currency)
+                                handleChangeTargetCurrency(value)
                             }
                         />
                     </Grid>
@@ -134,7 +156,7 @@ const CurrencyConverter = () => {
                 <StyledInnerGridContainer container>
                     <StyledGridItem item>
                         <StyledInput
-                            value={amountAfterConversion || ''}
+                            value={targetCurrencyAmount}
                             placeholder="Result"
                             type="number"
                             readOnly
