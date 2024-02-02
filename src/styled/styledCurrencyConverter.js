@@ -82,7 +82,7 @@ export const StyledInput = styled(Input)`
     }
 `;
 
-export const StyledTextFiled = styled(TextField)`
+export const StyledTextField = styled(TextField)`
     & .MuiOutlinedInput-root {
         &:hover fieldset {
             border-color: ${COLORS.WHITE};
@@ -117,6 +117,7 @@ export const StyledTextFiled = styled(TextField)`
 `;
 
 export const StyledIconButton = styled(IconButton)`
+    width: 50%;
     gap: 0.5rem;
     color: ${COLORS.WHITE};
     border: 2px solid ${COLORS.WHITE};

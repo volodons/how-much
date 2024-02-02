@@ -15,13 +15,9 @@ import {
 
 const ExchangeRates = () => {
     const dispatch = useDispatch();
-    const allCurrencyCodes = useSelector(
-        (state) => state.currencies.allCurrencyCodes
+    const { allCurrencyCodes, allCurrencies, baseCurrency } = useSelector(
+        (state) => state.currencies
     );
-    const allCurrencies = useSelector(
-        (state) => state.currencies.allCurrencies
-    );
-    const baseCurrency = useSelector((state) => state.currencies.baseCurrency);
 
     const handleAddToFeaturedCurrencies = (currency) => {
         dispatch({

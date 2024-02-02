@@ -3,7 +3,7 @@ import axios from 'axios';
 const FETCH_CURRENCIES_URL =
     'https://restcountries.com/v3.1/all?fields=currencies';
 const FETCH_EXCHANGE_RATES_URL =
-    'https://api.currencyapi.com/v3/latest?apikey=fca_live_Z1EPz50xGRjABKY5yyGvfS6YMLD7j7IBGuKTdz61';
+    'https://api.currencyapi.com/v3/latest?apikey=fca_live_HazPVkXc4QQOtWFenuShnJyWgSfY5aeWGmge0UDX';
 
 export const fetchAllExchangeRatesCurrencies = async () => {
     const allCurrencies = await axios.get(`${FETCH_CURRENCIES_URL}`);
