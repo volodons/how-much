@@ -4,9 +4,9 @@ import PriceChangeIcon from '@mui/icons-material/PriceChange';
 import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { Form } from 'formik';
 
-import { COLORS } from '../styles';
-import { MEDIA_QUERIES } from '../styles';
+import { COLORS, MEDIA_QUERIES } from '../styles';
 
 export const StyledBox = styled(Box)`
     width: 50%;
@@ -51,6 +51,10 @@ export const StyledTypography = styled(Typography)`
 export const StyledTypographyButton = styled(Typography)`
     font-size: 1.25rem;
     font-weight: bold;
+`;
+
+export const StyledForm = styled(Form)`
+    color: ${COLORS.RED};
 `;
 
 export const StyledTextField = styled(TextField)`

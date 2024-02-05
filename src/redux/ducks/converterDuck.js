@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { fetchAllConverterCurrencies, fetchExchangeRate } from '../../api';
+import { fetchConverterCurrencies, fetchExchangeRate } from '../../api';
 
 const initialState = {
-    allCurrencies: [],
+    currencies: [],
     baseCurrency: '',
     baseCurrencyAmount: 0,
     targetCurrency: '',
@@ -17,12 +17,12 @@ const converterSlice = createSlice({
     name: 'Converter',
     initialState,
     reducers: {
-        FETCH_ALL_CURRENCIES: (state) => state,
-        FETCH_ALL_CURRENCIES_FAILURE: (state, action) => {
+        FETCH_CURRENCIES: (state) => state,
+        FETCH_CURRENCIES_FAILURE: (state, action) => {
             state.error = action.payload;
         },
-        SET_ALL_CURRENCIES: (state, action) => {
-            state.allCurrencies = [...action.payload];
+        SET_CURRENCIES: (state, action) => {
+            state.currencies = [...action.payload];
         },
         SET_BASE_CURRENCY: (state, action) => {
             state.baseCurrency = action.payload;
@@ -48,19 +48,19 @@ const converterSlice = createSlice({
     },
 });
 
-function* fetchAllConverterCurrenciesSaga() {
+function* fetchConverterCurrenciesSaga() {
     try {
-        const response = yield call(fetchAllConverterCurrencies);
-        yield put(converterActions.SET_ALL_CURRENCIES(response));
+        const response = yield call(fetchConverterCurrencies);
+        yield put(converterActions.SET_CURRENCIES(response));
     } catch (error) {
-        yield put(converterActions.FETCH_ALL_CURRENCIES_FAILURE(error.message));
+        yield put(converterActions.FETCH_CURRENCIES_FAILURE(error.message));
     }
 }
 
-export function* watchAllConverterCurrencies() {
+export function* watchConverterCurrencies() {
     yield takeLatest(
-        converterActions.FETCH_ALL_CURRENCIES,
-        fetchAllConverterCurrenciesSaga
+        converterActions.FETCH_CURRENCIES,
+        fetchConverterCurrenciesSaga
     );
 }
 

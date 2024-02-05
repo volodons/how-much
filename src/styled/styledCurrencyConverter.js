@@ -1,5 +1,6 @@
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
@@ -7,8 +8,16 @@ import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
-import { COLORS } from '../styles';
-import { MEDIA_QUERIES } from '../styles';
+import { COLORS, MEDIA_QUERIES } from '../styles';
+
+export const StyledCircularProgressBox = styled(Box)`
+    display: flex;
+    justify-content: center;
+`;
+
+export const StyledCircularProgress = styled(CircularProgress)`
+    color: ${COLORS.WHITE};
+`;
 
 export const StyledTypographyHeading = styled(Typography)`
     margin-bottom: 2rem;
@@ -30,7 +39,7 @@ export const StyledTypographyButton = styled(Typography)`
     font-weight: bold;
 `;
 
-export const StyledBox = styled(Box)`
+export const StyledCurrencyConverterBox = styled(Box)`
     width: 50%;
     margin-left: auto;
     margin-right: auto;
@@ -66,6 +75,9 @@ export const StyledInnerGridContainer = styled(Grid)`
     justify-content: space-evenly;
     column-gap: 5rem;
     row-gap: 1rem;
+    & .MuiGrid-item {
+        color: ${COLORS.RED};
+    }
 `;
 
 export const StyledGridItem = styled(Grid)`
@@ -78,7 +90,7 @@ export const StyledInput = styled(Input)`
     border-color: ${COLORS.WHITE};
     & .MuiInputBase-input {
         text-align: center;
-        color: #ffffff;
+        color: ${COLORS.WHITE};
     }
 `;
 

@@ -1,14 +1,16 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 import {
     StyledBox,
     StyledTypography,
     StyledTypographyButton,
+    StyledForm,
     StyledTextField,
     StyledIconButton,
     StyledPriceChangeIcon,
@@ -17,7 +19,9 @@ import { currenciesActions } from '../redux/ducks/currenciesDuck';
 
 const CurrentCurrency = () => {
     const dispatch = useDispatch();
-    const { allCurrencies } = useSelector((state) => state.currencies);
+    const { currencies, baseCurrency } = useSelector(
+        (state) => state.currencies
+    );
 
     const handleChangeBaseCurrency = (currency) => {
         if (currency) {
@@ -33,11 +37,19 @@ const CurrentCurrency = () => {
         }
     };
 
+    useEffect(() => {
+        dispatch({ type: currenciesActions.FETCH_BASE_CURRENCY });
+    }, []);
+
+    const initialValues = {
+        baseCurrency: baseCurrency,
+    };
+
     return (
         <StyledBox>
             <StyledTypography variant="h2">Current Currency</StyledTypography>
             <Formik
-                initialValues={{ baseCurrency: '' }}
+                initialValues={initialValues}
                 onSubmit={(values) => {
                     handleChangeBaseCurrency(values.baseCurrency);
                 }}
@@ -47,13 +59,13 @@ const CurrentCurrency = () => {
                     ),
                 })}
             >
-                <Form>
+                <StyledForm>
                     <Grid item>
                         <Field name="baseCurrency">
                             {({ field, form }) => (
                                 <Autocomplete
                                     {...field}
-                                    options={allCurrencies}
+                                    options={currencies}
                                     getOptionLabel={(option) =>
                                         option.code || ''
                                     }
@@ -82,10 +94,10 @@ const CurrentCurrency = () => {
                     <StyledIconButton type="submit">
                         <StyledPriceChangeIcon />
                         <StyledTypographyButton variant="button">
-                            Set
+                            Fetch Rates
                         </StyledTypographyButton>
                     </StyledIconButton>
-                </Form>
+                </StyledForm>
             </Formik>
         </StyledBox>
     );

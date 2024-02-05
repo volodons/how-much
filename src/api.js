@@ -4,56 +4,53 @@ const FETCH_CURRENCIES_URL =
     'https://restcountries.com/v3.1/all?fields=currencies';
 const FETCH_EXCHANGE_RATES_URL =
     'https://api.currencyapi.com/v3/latest?apikey=fca_live_HazPVkXc4QQOtWFenuShnJyWgSfY5aeWGmge0UDX';
+const FETCH_BASE_CURRENCY_URL = 'https://ipapi.co/currency/';
 
-export const fetchAllExchangeRatesCurrencies = async () => {
-    const allCurrencies = await axios.get(`${FETCH_CURRENCIES_URL}`);
-    const allCurrencyCodes = [
-        ...new Set(
-            allCurrencies.data.map((item) => Object.keys(item.currencies)[0])
-        ),
+const fetchCurrencies = async () => {
+    const response = await axios.get(FETCH_CURRENCIES_URL);
+    return response.data;
+};
+
+const filterCurrencyCodes = (currencies) => {
+    const uniqueCurrencyCodes = [
+        ...new Set(currencies.map((item) => Object.keys(item.currencies)[0])),
     ];
-    const filteredAllCurrencyCodes = allCurrencyCodes.filter(
+    const filteredCurrencies = uniqueCurrencyCodes.filter(
         (code) => code && !['CKD', 'MRU', 'SSP', 'STN', 'VES'].includes(code)
     );
-    const allCurrenciesWithData = filteredAllCurrencyCodes.map(
-        (currency, index) => ({
-            id: index + 1,
-            code: currency,
-            exchangeRate: 0,
-            featured: false,
-        })
-    );
+    return filteredCurrencies;
+};
+
+export const fetchExchangeRatesCurrencies = async () => {
+    const currencies = await fetchCurrencies();
+    const filteredCurrencyCodes = filterCurrencyCodes(currencies);
+    const currenciesWithData = filteredCurrencyCodes.map((currency, index) => ({
+        id: index + 1,
+        code: currency,
+        exchangeRate: 0,
+        featured: false,
+    }));
     return {
-        allCurrenciesWithData,
-        filteredAllCurrencyCodes,
+        currenciesWithData,
+        filteredCurrencyCodes,
     };
 };
 
-export const fetchExchangeRates = async (baseCurrency, allCurrencyCodes) => {
-    const allExchangeRates = await axios.get(
-        `${FETCH_EXCHANGE_RATES_URL}&currencies=${allCurrencyCodes}&base_currency=${baseCurrency}`
+export const fetchExchangeRates = async (baseCurrency, currencyCodes) => {
+    const exchangeRates = await axios.get(
+        `${FETCH_EXCHANGE_RATES_URL}&currencies=${currencyCodes}&base_currency=${baseCurrency}`
     );
-    return allExchangeRates.data.data;
+    return exchangeRates.data.data;
 };
 
-export const fetchAllConverterCurrencies = async () => {
-    const allConverterCurrencies = await axios.get(`${FETCH_CURRENCIES_URL}`);
-    const allConverterCurrencyCodes = [
-        ...new Set(
-            allConverterCurrencies.data.map(
-                (item) => Object.keys(item.currencies)[0]
-            )
-        ),
-    ];
-    const filteredAllConverterCurrencyCodes = allConverterCurrencyCodes.filter(
-        (code) => code && !['CKD', 'MRU', 'SSP', 'STN', 'VES'].includes(code)
-    );
-    const allConverterCurrenciesWithData =
-        filteredAllConverterCurrencyCodes.map((currency, index) => ({
-            id: index + 1,
-            code: currency,
-        }));
-    return allConverterCurrenciesWithData;
+export const fetchConverterCurrencies = async () => {
+    const currencies = await fetchCurrencies();
+    const filteredCurrencyCodes = filterCurrencyCodes(currencies);
+    const currenciesWithData = filteredCurrencyCodes.map((currency, index) => ({
+        id: index + 1,
+        code: currency,
+    }));
+    return currenciesWithData;
 };
 
 export const fetchExchangeRate = async (baseCurrency, targetCurrency) => {
@@ -64,4 +61,10 @@ export const fetchExchangeRate = async (baseCurrency, targetCurrency) => {
     const key = Object.keys(exchangeRateData)[0];
     const exchangeRate = exchangeRateData[key].value;
     return exchangeRate;
+};
+
+export const fetchBaseCurrency = async () => {
+    const baseCurrencyResponse = await axios.get(FETCH_BASE_CURRENCY_URL);
+    const baseCurrency = { id: 9999, code: baseCurrencyResponse.data };
+    return baseCurrency;
 };

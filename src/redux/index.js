@@ -4,12 +4,13 @@ import { all } from 'redux-saga/effects';
 
 import {
     currenciesReducer,
-    watchAllCurrencies,
+    watchCurrencies,
     watchExchangeRates,
+    watchBaseCurrency,
 } from './ducks/currenciesDuck';
 import {
     converterReducer,
-    watchAllConverterCurrencies,
+    watchConverterCurrencies,
     watchExchangeRate,
 } from './ducks/converterDuck';
 
@@ -20,10 +21,11 @@ const rootReducer = combineReducers({
 
 function* rootSaga() {
     yield all([
-        watchAllCurrencies(),
+        watchCurrencies(),
         watchExchangeRates(),
-        watchAllConverterCurrencies(),
+        watchConverterCurrencies(),
         watchExchangeRate(),
+        watchBaseCurrency(),
     ]);
 }
 

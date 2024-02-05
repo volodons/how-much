@@ -15,32 +15,32 @@ import {
 
 const ExchangeRates = () => {
     const dispatch = useDispatch();
-    const { allCurrencyCodes, allCurrencies, baseCurrency } = useSelector(
+    const { currencyCodes, currencies, baseCurrency } = useSelector(
         (state) => state.currencies
     );
 
     const handleAddToFeaturedCurrencies = (currency) => {
         dispatch({
-            type: currenciesActions.ADD_TO_FEATURED.type,
+            type: currenciesActions.ADD_TO_FEATURED_CURRENCIES.type,
             payload: currency,
         });
     };
 
     const handleRemoveFromFeaturedCurrencies = (currency) => {
         dispatch({
-            type: currenciesActions.REMOVE_FROM_FEATURED.type,
+            type: currenciesActions.REMOVE_FROM_FEATURED_CURRENCIES.type,
             payload: currency,
         });
     };
 
     useEffect(() => {
-        dispatch({ type: currenciesActions.FETCH_ALL_CURRENCIES.type });
+        dispatch({ type: currenciesActions.FETCH_CURRENCIES.type });
     }, []);
 
     useEffect(() => {
         dispatch({
             type: currenciesActions.FETCH_EXCHANGE_RATES.type,
-            payload: { baseCurrency, allCurrencyCodes },
+            payload: { baseCurrency, currencyCodes },
         });
     }, [baseCurrency]);
 
@@ -51,7 +51,7 @@ const ExchangeRates = () => {
             </StyledTypographyHeading>
             <Grid container>
                 {baseCurrency &&
-                    allCurrencies.map((currency) =>
+                    currencies.map((currency) =>
                         currency.featured ? (
                             <StyledGrid container key={currency.id}>
                                 <Grid item>
@@ -74,7 +74,7 @@ const ExchangeRates = () => {
                         ) : null
                     )}
                 {baseCurrency &&
-                    allCurrencies.map((currency) =>
+                    currencies.map((currency) =>
                         !currency.featured ? (
                             <StyledGrid container key={currency.id}>
                                 <Grid item>

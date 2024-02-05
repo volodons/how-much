@@ -1,11 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { fetchAllExchangeRatesCurrencies, fetchExchangeRates } from '../../api';
+import {
+    fetchExchangeRatesCurrencies,
+    fetchExchangeRates,
+    fetchBaseCurrency,
+} from '../../api';
 
 const initialState = {
-    allCurrencies: [],
-    allCurrencyCodes: [],
+    currencies: [],
+    currencyCodes: [],
     baseCurrency: '',
     error: null,
 };
@@ -14,15 +18,17 @@ const currenciesSlice = createSlice({
     name: 'Currencies',
     initialState,
     reducers: {
-        FETCH_ALL_CURRENCIES: (state) => state,
-        FETCH_ALL_CURRENCIES_FAILURE: (state, action) => {
+        FETCH_CURRENCIES: (state) => state,
+        FETCH_CURRENCIES_FAILURE: (state, action) => {
             state.error = action.payload;
         },
-        SET_ALL_CURRENCIES: (state, action) => {
-            state.allCurrencies = [...action.payload.allCurrenciesWithData];
-            state.allCurrencyCodes = [
-                ...action.payload.filteredAllCurrencyCodes,
-            ];
+        SET_CURRENCIES: (state, action) => {
+            state.currencies = [...action.payload.currenciesWithData];
+            state.currencyCodes = [...action.payload.filteredCurrencyCodes];
+        },
+        FETCH_BASE_CURRENCY: (state) => state,
+        FETCH_BASE_CURRENCY_FAILURE: (state, action) => {
+            state.error = action.payload;
         },
         SET_BASE_CURRENCY: (state, action) => {
             state.baseCurrency = action.payload;
@@ -33,7 +39,7 @@ const currenciesSlice = createSlice({
         },
         SET_EXCHANGE_RATES: (state, action) => {
             Object.entries(action.payload).forEach(([code, currency]) => {
-                const currencyToUpdate = state.allCurrencies.find(
+                const currencyToUpdate = state.currencies.find(
                     (item) => item.code === code
                 );
                 if (currencyToUpdate) {
@@ -41,8 +47,8 @@ const currenciesSlice = createSlice({
                 }
             });
         },
-        ADD_TO_FEATURED: (state, action) => {
-            state.allCurrencies = state.allCurrencies.map((currency) => {
+        ADD_TO_FEATURED_CURRENCIES: (state, action) => {
+            state.currencies = state.currencies.map((currency) => {
                 if (currency.id === action.payload.id) {
                     return {
                         ...currency,
@@ -52,8 +58,8 @@ const currenciesSlice = createSlice({
                 return currency;
             });
         },
-        REMOVE_FROM_FEATURED: (state, action) => {
-            state.allCurrencies = state.allCurrencies.map((currency) => {
+        REMOVE_FROM_FEATURED_CURRENCIES: (state, action) => {
+            state.currencies = state.currencies.map((currency) => {
                 if (currency.id === action.payload.id) {
                     return {
                         ...currency,
@@ -66,31 +72,42 @@ const currenciesSlice = createSlice({
     },
 });
 
-function* fetchAllCurrenciesSaga() {
+function* fetchCurrenciesSaga() {
     try {
-        const response = yield call(fetchAllExchangeRatesCurrencies);
-        yield put(currenciesActions.SET_ALL_CURRENCIES(response));
+        const response = yield call(fetchExchangeRatesCurrencies);
+        yield put(currenciesActions.SET_CURRENCIES(response));
     } catch (error) {
-        yield put(
-            currenciesActions.FETCH_ALL_CURRENCIES_FAILURE(error.message)
-        );
+        yield put(currenciesActions.FETCH_CURRENCIES_FAILURE(error.message));
     }
 }
 
-export function* watchAllCurrencies() {
+export function* watchCurrencies() {
+    yield takeLatest(currenciesActions.FETCH_CURRENCIES, fetchCurrenciesSaga);
+}
+
+function* fetchBaseCurrencySaga() {
+    try {
+        const response = yield call(fetchBaseCurrency);
+        yield put(currenciesActions.SET_BASE_CURRENCY(response));
+    } catch (error) {
+        yield put(currenciesActions.FETCH_BASE_CURRENCY_FAILURE(error.message));
+    }
+}
+
+export function* watchBaseCurrency() {
     yield takeLatest(
-        currenciesActions.FETCH_ALL_CURRENCIES,
-        fetchAllCurrenciesSaga
+        currenciesActions.FETCH_BASE_CURRENCY,
+        fetchBaseCurrencySaga
     );
 }
 
 function* fetchExchangeRatesSaga(action) {
-    const { baseCurrency, allCurrencyCodes } = action.payload;
+    const { baseCurrency, currencyCodes } = action.payload;
     try {
         const response = yield call(
             fetchExchangeRates,
-            baseCurrency,
-            allCurrencyCodes
+            baseCurrency.code,
+            currencyCodes
         );
         yield put(currenciesActions.SET_EXCHANGE_RATES(response));
     } catch (error) {

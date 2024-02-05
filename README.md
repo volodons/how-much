@@ -18,7 +18,7 @@ To get started with this project, follow these steps:
     cd how-much
     ```
 
-3. Install dependecies:
+3. Install dependencies:
 
     ```bash
     npm install

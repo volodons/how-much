@@ -6,8 +6,7 @@ import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
-import { COLORS } from '../styles';
-import { MEDIA_QUERIES } from '../styles';
+import { COLORS, MEDIA_QUERIES } from '../styles';
 
 export const StyledBox = styled(Box)`
     width: 50%;

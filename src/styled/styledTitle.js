@@ -1,8 +1,7 @@
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 
-import { COLORS } from '../styles';
-import { MEDIA_QUERIES } from '../styles';
+import { COLORS, MEDIA_QUERIES } from '../styles';
 
 export const StyledTypography = styled(Typography)`
     margin-bottom: 2rem;
