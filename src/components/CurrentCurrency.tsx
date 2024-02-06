@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -17,7 +18,7 @@ import {
 } from '../styled/styledCurrentCurrency';
 import { currenciesActions } from '../redux/ducks/currenciesDuck';
 
-const CurrentCurrency = () => {
+const CurrentCurrency: React.FC = () => {
     const dispatch = useDispatch();
     const { currencies, baseCurrency } = useSelector(
         (state) => state.currencies

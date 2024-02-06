@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -18,8 +19,8 @@ import {
     StyledPriceChangeIcon,
 } from '../styled/styledNavigation';
 
-const Navigation = () => {
-    const [openDrawer, setOpenDrawer] = useState(false);
+const Navigation: React.FC = () => {
+    const [openDrawer, setOpenDrawer] = useState<boolean>(false);
 
     const handleToggleDrawer = () => {
         setOpenDrawer(!openDrawer);

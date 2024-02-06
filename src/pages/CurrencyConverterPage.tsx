@@ -1,6 +1,8 @@
+import React from 'react';
+
 import { CurrencyConverter, Navigation, Title } from '../components';
 
-const CurrencyConverterPage = () => (
+const CurrencyConverterPage: React.FC = () => (
     <>
         <Navigation />
         <Title />

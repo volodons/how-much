@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@mui/material/Grid';
@@ -13,7 +14,7 @@ import {
     StyledStarOutlineIcon,
 } from '../styled/styledExchangeRates';
 
-const ExchangeRates = () => {
+const ExchangeRates: React.FC = () => {
     const dispatch = useDispatch();
     const { currencyCodes, currencies, baseCurrency } = useSelector(
         (state) => state.currencies

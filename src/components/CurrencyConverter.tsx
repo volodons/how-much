@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -23,7 +24,7 @@ import {
     StyledCurrencyExchangeIcon,
 } from '../styled/styledCurrencyConverter';
 
-const CurrencyConverter = () => {
+const CurrencyConverter: React.FC = () => {
     const dispatch = useDispatch();
     const { currencies, targetCurrencyAmount } = useSelector(
         (state) => state.converter
