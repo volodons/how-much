@@ -1,11 +1,12 @@
 import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import PriceChangeIcon from '@mui/icons-material/PriceChange';
 import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import Flag from 'react-world-flags';
+import { Form } from 'formik';
 
-import { COLORS } from '../styles';
-import { MEDIA_QUERIES } from '../styles';
+import { COLORS, MEDIA_QUERIES } from '../styles';
 
 export const StyledBox = styled(Box)`
     width: 50%;
@@ -47,6 +48,15 @@ export const StyledTypography = styled(Typography)`
     }
 `;
 
+export const StyledTypographyButton = styled(Typography)`
+    font-size: 1.25rem;
+    font-weight: bold;
+`;
+
+export const StyledForm = styled(Form)`
+    color: ${COLORS.RED};
+`;
+
 export const StyledTextField = styled(TextField)`
     & .MuiOutlinedInput-root {
         &:hover fieldset {
@@ -81,8 +91,20 @@ export const StyledTextField = styled(TextField)`
     }
 `;
 
-export const StyledFlag = styled(Flag)`
-    width: 2rem;
-    height: 2rem;
-    margin-right: 1rem;
+export const StyledIconButton = styled(IconButton)`
+    width: 50%;
+    margin-top: 2rem;
+    gap: 0.5rem;
+    color: ${COLORS.WHITE};
+    border: 2px solid ${COLORS.WHITE};
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px ${COLORS.BLACK_MOST_TRANSPARENT};
+    &:hover {
+        box-shadow: 3px 3px 6px ${COLORS.BLACK_TRANSPARENT};
+    }
+`;
+
+export const StyledPriceChangeIcon = styled(PriceChangeIcon)`
+    font-size: 2rem;
+    color: ${COLORS.WHITE};
 `;

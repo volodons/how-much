@@ -3,6 +3,7 @@ export const COLORS = {
     BLUE: '#0390fc',
     PURPLE: '#562fff',
     GOLD: '#ffd700',
+    RED: '#820000',
     BLACK_MOST_TRANSPARENT: 'rgba(0, 0, 0, 0.3)',
     BLACK_TRANSPARENT: 'rgba(0, 0, 0, 0.4)',
     BLACK_LEAST_TRANSPARENT: 'rgba(0, 0, 0, 0.5)',

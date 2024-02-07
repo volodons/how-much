@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
-
 import 'typeface-lobster';
+
 import { COLORS } from '../styles';
 
 export const StyledApp = createGlobalStyle`

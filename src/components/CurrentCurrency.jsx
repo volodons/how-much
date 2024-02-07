@@ -1,50 +1,104 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import { Formik, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 import {
     StyledBox,
     StyledTypography,
+    StyledTypographyButton,
+    StyledForm,
     StyledTextField,
-    StyledFlag,
+    StyledIconButton,
+    StyledPriceChangeIcon,
 } from '../styled/styledCurrentCurrency';
+import { currenciesActions } from '../redux/ducks/currenciesDuck';
 
 const CurrentCurrency = () => {
-    const allCurrencies = useSelector(
-        (state) => state.currencies.allCurrencies
+    const dispatch = useDispatch();
+    const { currencies, baseCurrency } = useSelector(
+        (state) => state.currencies
     );
-    const [selectedCurrency, setSelectedCurrency] = useState('');
 
-    const handleChangeSelectedCurrency = (currency) => {
-        setSelectedCurrency(currency);
+    const handleChangeBaseCurrency = (currency) => {
+        if (currency) {
+            dispatch({
+                type: currenciesActions.SET_BASE_CURRENCY.type,
+                payload: currency.code,
+            });
+        } else {
+            dispatch({
+                type: currenciesActions.SET_BASE_CURRENCY.type,
+                payload: '',
+            });
+        }
     };
 
-    const handleInputChange = (value) => {
-        if (!value) {
-            setSelectedCurrency('');
-        }
+    useEffect(() => {
+        dispatch({ type: currenciesActions.FETCH_BASE_CURRENCY });
+    }, []);
+
+    const initialValues = {
+        baseCurrency: baseCurrency,
     };
 
     return (
         <StyledBox>
             <StyledTypography variant="h2">Current Currency</StyledTypography>
-            <Autocomplete
-                value={selectedCurrency || ''}
-                options={allCurrencies}
-                getOptionLabel={(option) => option.currency || selectedCurrency}
-                renderInput={(params) => (
-                    <StyledTextField {...params} label="Choose Your Currency" />
-                )}
-                renderOption={(props, option) => (
-                    <Box component="li" {...props}>
-                        <StyledFlag code={option.country} />
-                        {option.currency}
-                    </Box>
-                )}
-                onChange={(event, value) => handleChangeSelectedCurrency(value)}
-                onInputChange={(event, value) => handleInputChange(value)}
-            />
+            <Formik
+                initialValues={initialValues}
+                onSubmit={(values) => {
+                    handleChangeBaseCurrency(values.baseCurrency);
+                }}
+                validationSchema={Yup.object().shape({
+                    baseCurrency: Yup.object().required(
+                        'This field is required'
+                    ),
+                })}
+            >
+                <StyledForm>
+                    <Grid item>
+                        <Field name="baseCurrency">
+                            {({ field, form }) => (
+                                <Autocomplete
+                                    {...field}
+                                    options={currencies}
+                                    getOptionLabel={(option) =>
+                                        option.code || ''
+                                    }
+                                    renderInput={(params) => (
+                                        <StyledTextField
+                                            {...params}
+                                            label="Choose Your Currency"
+                                        />
+                                    )}
+                                    renderOption={(props, option) => (
+                                        <Box component="li" {...props}>
+                                            {option.code}
+                                        </Box>
+                                    )}
+                                    onChange={(event, value) => {
+                                        form.setFieldValue(
+                                            'baseCurrency',
+                                            value
+                                        );
+                                    }}
+                                />
+                            )}
+                        </Field>
+                        <ErrorMessage name="baseCurrency" />
+                    </Grid>
+                    <StyledIconButton type="submit">
+                        <StyledPriceChangeIcon />
+                        <StyledTypographyButton variant="button">
+                            Fetch Rates
+                        </StyledTypographyButton>
+                    </StyledIconButton>
+                </StyledForm>
+            </Formik>
         </StyledBox>
     );
 };

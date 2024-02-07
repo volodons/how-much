@@ -1,15 +1,23 @@
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
 import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import Flag from 'react-world-flags';
 
-import { COLORS } from '../styles';
-import { MEDIA_QUERIES } from '../styles';
+import { COLORS, MEDIA_QUERIES } from '../styles';
+
+export const StyledCircularProgressBox = styled(Box)`
+    display: flex;
+    justify-content: center;
+`;
+
+export const StyledCircularProgress = styled(CircularProgress)`
+    color: ${COLORS.WHITE};
+`;
 
 export const StyledTypographyHeading = styled(Typography)`
     margin-bottom: 2rem;
@@ -31,7 +39,7 @@ export const StyledTypographyButton = styled(Typography)`
     font-weight: bold;
 `;
 
-export const StyledBox = styled(Box)`
+export const StyledCurrencyConverterBox = styled(Box)`
     width: 50%;
     margin-left: auto;
     margin-right: auto;
@@ -67,6 +75,9 @@ export const StyledInnerGridContainer = styled(Grid)`
     justify-content: space-evenly;
     column-gap: 5rem;
     row-gap: 1rem;
+    & .MuiGrid-item {
+        color: ${COLORS.RED};
+    }
 `;
 
 export const StyledGridItem = styled(Grid)`
@@ -79,11 +90,11 @@ export const StyledInput = styled(Input)`
     border-color: ${COLORS.WHITE};
     & .MuiInputBase-input {
         text-align: center;
-        color: #ffffff;
+        color: ${COLORS.WHITE};
     }
 `;
 
-export const StyledTextFiled = styled(TextField)`
+export const StyledTextField = styled(TextField)`
     & .MuiOutlinedInput-root {
         &:hover fieldset {
             border-color: ${COLORS.WHITE};
@@ -118,6 +129,7 @@ export const StyledTextFiled = styled(TextField)`
 `;
 
 export const StyledIconButton = styled(IconButton)`
+    width: 50%;
     gap: 0.5rem;
     color: ${COLORS.WHITE};
     border: 2px solid ${COLORS.WHITE};
@@ -126,12 +138,6 @@ export const StyledIconButton = styled(IconButton)`
     &:hover {
         box-shadow: 3px 3px 6px ${COLORS.BLACK_TRANSPARENT};
     }
-`;
-
-export const StyledFlag = styled(Flag)`
-    width: 2rem;
-    height: 2rem;
-    margin-right: 1rem;
 `;
 
 export const StyledCurrencyExchangeIcon = styled(CurrencyExchangeIcon)`

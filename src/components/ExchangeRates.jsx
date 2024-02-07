@@ -11,16 +11,12 @@ import {
     StyledButton,
     StyledStarIcon,
     StyledStarOutlineIcon,
-    StyledFlag,
 } from '../styled/styledExchangeRates';
 
 const ExchangeRates = () => {
     const dispatch = useDispatch();
-    const allCurrencies = useSelector(
-        (state) => state.currencies.allCurrencies
-    );
-    const featuredCurrencies = useSelector(
-        (state) => state.currencies.featuredCurrencies
+    const { currencyCodes, currencies, baseCurrency } = useSelector(
+        (state) => state.currencies
     );
 
     const handleAddToFeaturedCurrencies = (currency) => {
@@ -38,8 +34,15 @@ const ExchangeRates = () => {
     };
 
     useEffect(() => {
-        dispatch(currenciesActions.FETCH_ALL_CURRENCIES());
+        dispatch({ type: currenciesActions.FETCH_CURRENCIES.type });
     }, []);
+
+    useEffect(() => {
+        dispatch({
+            type: currenciesActions.FETCH_EXCHANGE_RATES.type,
+            payload: { baseCurrency, currencyCodes },
+        });
+    }, [baseCurrency]);
 
     return (
         <StyledBox>
@@ -47,44 +50,52 @@ const ExchangeRates = () => {
                 Exchange Rates
             </StyledTypographyHeading>
             <Grid container>
-                {featuredCurrencies.map((currency) => (
-                    <StyledGrid container key={currency.id}>
-                        <Grid item>
-                            <StyledButton
-                                onClick={() =>
-                                    handleRemoveFromFeaturedCurrencies(currency)
-                                }
-                            >
-                                <StyledStarIcon />
-                            </StyledButton>
-                        </Grid>
-                        <Grid item>
-                            <StyledTypographyText>
-                                {currency.exchangeRate} {currency.currency}{' '}
-                                <StyledFlag code="UKR" />
-                            </StyledTypographyText>
-                        </Grid>
-                    </StyledGrid>
-                ))}
-                {allCurrencies.map((currency) => (
-                    <StyledGrid container key={currency.id}>
-                        <Grid item>
-                            <StyledButton
-                                onClick={() =>
-                                    handleAddToFeaturedCurrencies(currency)
-                                }
-                            >
-                                <StyledStarOutlineIcon />
-                            </StyledButton>
-                        </Grid>
-                        <Grid item>
-                            <StyledTypographyText>
-                                {currency.exchangeRate} {currency.currency}{' '}
-                                <StyledFlag code="UKR" />
-                            </StyledTypographyText>
-                        </Grid>
-                    </StyledGrid>
-                ))}
+                {baseCurrency &&
+                    currencies.map((currency) =>
+                        currency.featured ? (
+                            <StyledGrid container key={currency.id}>
+                                <Grid item>
+                                    <StyledButton
+                                        onClick={() =>
+                                            handleRemoveFromFeaturedCurrencies(
+                                                currency
+                                            )
+                                        }
+                                    >
+                                        <StyledStarIcon />
+                                    </StyledButton>
+                                </Grid>
+                                <Grid item>
+                                    <StyledTypographyText>
+                                        {currency.exchangeRate} {currency.code}{' '}
+                                    </StyledTypographyText>
+                                </Grid>
+                            </StyledGrid>
+                        ) : null
+                    )}
+                {baseCurrency &&
+                    currencies.map((currency) =>
+                        !currency.featured ? (
+                            <StyledGrid container key={currency.id}>
+                                <Grid item>
+                                    <StyledButton
+                                        onClick={() =>
+                                            handleAddToFeaturedCurrencies(
+                                                currency
+                                            )
+                                        }
+                                    >
+                                        <StyledStarOutlineIcon />
+                                    </StyledButton>
+                                </Grid>
+                                <Grid item>
+                                    <StyledTypographyText>
+                                        {currency.exchangeRate} {currency.code}{' '}
+                                    </StyledTypographyText>
+                                </Grid>
+                            </StyledGrid>
+                        ) : null
+                    )}
             </Grid>
         </StyledBox>
     );

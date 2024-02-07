@@ -1,21 +1,32 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { combineReducers } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import { all } from 'redux-saga/effects';
 
-import { currenciesReducer, watchAllCurrencies } from './ducks/currenciesDuck';
 import {
-    exchangeRatesReducer,
+    currenciesReducer,
+    watchCurrencies,
     watchExchangeRates,
-} from './ducks/exchangeRatesDuck';
+    watchBaseCurrency,
+} from './ducks/currenciesDuck';
+import {
+    converterReducer,
+    watchConverterCurrencies,
+    watchExchangeRate,
+} from './ducks/converterDuck';
 
 const rootReducer = combineReducers({
     currencies: currenciesReducer,
-    exchangeRates: exchangeRatesReducer,
+    converter: converterReducer,
 });
 
 function* rootSaga() {
-    yield all([watchAllCurrencies(), watchExchangeRates()]);
+    yield all([
+        watchCurrencies(),
+        watchExchangeRates(),
+        watchConverterCurrencies(),
+        watchExchangeRate(),
+        watchBaseCurrency(),
+    ]);
 }
 
 const sagaMiddleware = createSagaMiddleware();
