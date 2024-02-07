@@ -14,6 +14,8 @@ import {
     watchExchangeRate,
 } from './ducks/converterDuck';
 
+export type RootState = ReturnType<typeof rootReducer>;
+
 const rootReducer = combineReducers({
     currencies: currenciesReducer,
     converter: converterReducer,

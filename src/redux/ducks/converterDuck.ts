@@ -67,7 +67,7 @@ function* fetchConverterCurrenciesSaga() {
     try {
         const response: Currency[] = yield call(fetchConverterCurrencies);
         yield put(converterActions.SET_CURRENCIES(response));
-    } catch (error) {
+    } catch (error: any) {
         yield put(converterActions.FETCH_CURRENCIES_FAILURE(error.message));
     }
 }
@@ -84,14 +84,14 @@ function* fetchExchangeRateSaga(
 ) {
     const { baseCurrency, targetCurrency } = action.payload;
     try {
-        const response = yield call(
+        const response: number = yield call(
             fetchExchangeRate,
             baseCurrency,
             targetCurrency
         );
         yield put(converterActions.SET_EXCHANGE_RATE(response));
         yield put(converterActions.CALCULATE_TARGET_CURRENCY_AMOUNT());
-    } catch (error) {
+    } catch (error: any) {
         yield put(converterActions.FETCH_EXCHANGE_RATE_FAILURE(error.message));
     }
 }

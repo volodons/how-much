@@ -7,6 +7,8 @@ import Grid from '@mui/material/Grid';
 import { Formik, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
+import { RootState } from '../redux';
+import { currenciesActions } from '../redux/ducks/currenciesDuck';
 import {
     StyledBox,
     StyledTypography,
@@ -16,19 +18,29 @@ import {
     StyledIconButton,
     StyledPriceChangeIcon,
 } from '../styled/styledCurrentCurrency';
-import { currenciesActions } from '../redux/ducks/currenciesDuck';
+
+interface Currency {
+    id: number;
+    code: string;
+    exchangeRate: number;
+    featured: boolean;
+}
+
+interface Values {
+    baseCurrency: string;
+}
 
 const CurrentCurrency: React.FC = () => {
     const dispatch = useDispatch();
     const { currencies, baseCurrency } = useSelector(
-        (state) => state.currencies
+        (state: RootState) => state.currencies
     );
 
-    const handleChangeBaseCurrency = (currency) => {
+    const handleChangeBaseCurrency = (currency: string | null) => {
         if (currency) {
             dispatch({
                 type: currenciesActions.SET_BASE_CURRENCY.type,
-                payload: currency.code,
+                payload: currency,
             });
         } else {
             dispatch({
@@ -39,11 +51,11 @@ const CurrentCurrency: React.FC = () => {
     };
 
     useEffect(() => {
-        dispatch({ type: currenciesActions.FETCH_BASE_CURRENCY });
+        dispatch({ type: currenciesActions.FETCH_BASE_CURRENCY.type });
     }, []);
 
-    const initialValues = {
-        baseCurrency: baseCurrency,
+    const initialValues: Values = {
+        baseCurrency: baseCurrency || '',
     };
 
     return (
@@ -52,7 +64,7 @@ const CurrentCurrency: React.FC = () => {
             <Formik
                 initialValues={initialValues}
                 onSubmit={(values) => {
-                    handleChangeBaseCurrency(values.baseCurrency);
+                    handleChangeBaseCurrency((values.baseCurrency as any).code);
                 }}
                 validationSchema={Yup.object().shape({
                     baseCurrency: Yup.object().required(
@@ -63,11 +75,11 @@ const CurrentCurrency: React.FC = () => {
                 <StyledForm>
                     <Grid item>
                         <Field name="baseCurrency">
-                            {({ field, form }) => (
+                            {({ field, form }: { field: any; form: any }) => (
                                 <Autocomplete
                                     {...field}
                                     options={currencies}
-                                    getOptionLabel={(option) =>
+                                    getOptionLabel={(option: Currency) =>
                                         option.code || ''
                                     }
                                     renderInput={(params) => (
@@ -76,15 +88,18 @@ const CurrentCurrency: React.FC = () => {
                                             label="Choose Your Currency"
                                         />
                                     )}
-                                    renderOption={(props, option) => (
+                                    renderOption={(props, option: Currency) => (
                                         <Box component="li" {...props}>
                                             {option.code}
                                         </Box>
                                     )}
-                                    onChange={(event, value) => {
+                                    onChange={(
+                                        event: React.ChangeEvent<{}>,
+                                        value: Currency | null
+                                    ) => {
                                         form.setFieldValue(
                                             'baseCurrency',
-                                            value
+                                            value || ''
                                         );
                                     }}
                                 />

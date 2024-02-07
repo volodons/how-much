@@ -7,6 +7,7 @@ import Grid from '@mui/material/Grid';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
+import { RootState } from '../redux';
 import { converterActions } from '../redux/ducks/converterDuck';
 import { currenciesActions } from '../redux/ducks/currenciesDuck';
 import {
@@ -24,19 +25,34 @@ import {
     StyledCurrencyExchangeIcon,
 } from '../styled/styledCurrencyConverter';
 
+interface Currency {
+    id: number;
+    code: string;
+    exchangeRate: number;
+    featured: boolean;
+}
+interface Values {
+    baseCurrency: Currency | string;
+    baseCurrencyAmount: number;
+    targetCurrency: Currency | string;
+    targetCurrencyAmount: number;
+}
+
 const CurrencyConverter: React.FC = () => {
     const dispatch = useDispatch();
     const { currencies, targetCurrencyAmount } = useSelector(
-        (state) => state.converter
+        (state: RootState) => state.converter
     );
-    const { baseCurrency } = useSelector((state) => state.currencies);
+    const { baseCurrency } = useSelector(
+        (state: RootState) => state.currencies
+    );
 
-    const handleConvertCurrency = (values) => {
+    const handleConvertCurrency = (values: Values) => {
         dispatch({
             type: converterActions.FETCH_EXCHANGE_RATE.type,
             payload: {
-                baseCurrency: values.baseCurrency.code,
-                targetCurrency: values.targetCurrency.code,
+                baseCurrency: (values.baseCurrency as Currency).code,
+                targetCurrency: (values.targetCurrency as Currency).code,
             },
         });
     };
@@ -49,11 +65,11 @@ const CurrencyConverter: React.FC = () => {
         dispatch({ type: currenciesActions.FETCH_BASE_CURRENCY.type });
     }, []);
 
-    const initialValues = {
+    const initialValues: Values = {
         baseCurrency: baseCurrency || '',
-        baseCurrencyAmount: '',
+        baseCurrencyAmount: 0,
         targetCurrency: '',
-        targetCurrencyAmount: targetCurrencyAmount || '',
+        targetCurrencyAmount: targetCurrencyAmount || 0,
     };
 
     return (
@@ -108,13 +124,19 @@ const CurrencyConverter: React.FC = () => {
                                     </Grid>
                                     <Grid item>
                                         <Field name="baseCurrency">
-                                            {({ field, form }) => (
+                                            {({
+                                                field,
+                                                form,
+                                            }: {
+                                                field: any;
+                                                form: any;
+                                            }) => (
                                                 <Autocomplete
                                                     {...field}
                                                     options={currencies}
-                                                    getOptionLabel={(option) =>
-                                                        option.code || ''
-                                                    }
+                                                    getOptionLabel={(
+                                                        option: Currency
+                                                    ) => option.code || ''}
                                                     renderInput={(params) => (
                                                         <StyledTextField
                                                             {...params}
@@ -123,7 +145,7 @@ const CurrencyConverter: React.FC = () => {
                                                     )}
                                                     renderOption={(
                                                         props,
-                                                        option
+                                                        option: Currency
                                                     ) => (
                                                         <Box
                                                             component="li"
@@ -133,8 +155,8 @@ const CurrencyConverter: React.FC = () => {
                                                         </Box>
                                                     )}
                                                     onChange={(
-                                                        event,
-                                                        value
+                                                        event: React.ChangeEvent<{}>,
+                                                        value: Currency | null
                                                     ) => {
                                                         if (value) {
                                                             form.setFieldValue(
@@ -155,13 +177,19 @@ const CurrencyConverter: React.FC = () => {
                                     </Grid>
                                     <Grid item>
                                         <Field name="targetCurrency">
-                                            {({ field, form }) => (
+                                            {({
+                                                field,
+                                                form,
+                                            }: {
+                                                field: any;
+                                                form: any;
+                                            }) => (
                                                 <Autocomplete
                                                     {...field}
                                                     options={currencies}
-                                                    getOptionLabel={(option) =>
-                                                        option.code || ''
-                                                    }
+                                                    getOptionLabel={(
+                                                        option: Currency
+                                                    ) => option.code || ''}
                                                     renderInput={(params) => (
                                                         <StyledTextField
                                                             {...params}
@@ -170,7 +198,7 @@ const CurrencyConverter: React.FC = () => {
                                                     )}
                                                     renderOption={(
                                                         props,
-                                                        option
+                                                        option: Currency
                                                     ) => (
                                                         <Box
                                                             component="li"
@@ -180,8 +208,8 @@ const CurrencyConverter: React.FC = () => {
                                                         </Box>
                                                     )}
                                                     onChange={(
-                                                        event,
-                                                        value
+                                                        event: React.ChangeEvent<{}>,
+                                                        value: Currency | null
                                                     ) => {
                                                         if (value) {
                                                             form.setFieldValue(
