@@ -19,8 +19,8 @@ interface ExchangeRatesCurrenciesResponse {
     filteredCurrencyCodes: string[];
 }
 
-interface ExchangeRate {
-    [key: string]: {
+interface ExchangeRates {
+    [currencyCode: string]: {
         code: string;
         value: number;
     };
@@ -69,14 +69,14 @@ const currenciesSlice = createSlice({
         ) => {
             state.error = action.payload;
         },
-        SET_EXCHANGE_RATES: (state, action: PayloadAction<ExchangeRate[]>) => {
-            Object.entries(action.payload).forEach(([code, currency]) => {
+        SET_EXCHANGE_RATES: (state, action: PayloadAction<ExchangeRates>) => {
+            Object.values(action.payload).forEach((currency) => {
                 const currencyToUpdate = state.currencies.find(
-                    (item) => item.code === code
+                    (item) => item.code === currency.code
                 );
                 if (currencyToUpdate) {
                     currencyToUpdate.exchangeRate = parseFloat(
-                        (currency as any).value.toFixed(2)
+                        currency.value.toFixed(2)
                     );
                 }
             });
@@ -145,7 +145,7 @@ function* fetchExchangeRatesSaga(
 ) {
     const { baseCurrency, currencyCodes } = action.payload;
     try {
-        const response: ExchangeRate[] = yield call(
+        const response: ExchangeRates = yield call(
             fetchExchangeRates,
             baseCurrency,
             currencyCodes
