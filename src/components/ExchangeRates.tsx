@@ -53,7 +53,7 @@ const ExchangeRates: React.FC = () => {
     }, [baseCurrency]);
 
     return (
-        <StyledBox>
+        <StyledBox data-testid="exchange-rates-component">
             <StyledTypographyHeading variant="h2">
                 Exchange Rates
             </StyledTypographyHeading>
@@ -92,6 +92,7 @@ const ExchangeRates: React.FC = () => {
                                                 currency
                                             )
                                         }
+                                        data-testid="star-icon-button"
                                     >
                                         <StyledStarOutlineIcon />
                                     </StyledButton>

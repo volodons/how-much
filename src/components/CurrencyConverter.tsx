@@ -72,7 +72,7 @@ const CurrencyConverter: React.FC = () => {
     };
 
     return (
-        <>
+        <Box data-testid="currency-converter-component">
             {!currencies || !baseCurrency ? (
                 <StyledCircularProgressBox>
                     <StyledCircularProgress size="5rem" />
@@ -250,7 +250,7 @@ const CurrencyConverter: React.FC = () => {
                     </Formik>
                 </StyledCurrencyConverterBox>
             )}
-        </>
+        </Box>
     );
 };
 

@@ -58,7 +58,7 @@ const CurrentCurrency: React.FC = () => {
     };
 
     return (
-        <StyledBox>
+        <StyledBox data-testid="current-currency-component">
             <StyledTypography variant="h2">Current Currency</StyledTypography>
             <Formik
                 initialValues={initialValues}

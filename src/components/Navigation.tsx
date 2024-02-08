@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -26,10 +27,13 @@ const Navigation: React.FC = () => {
     };
 
     return (
-        <>
-            <StyledDrawer open={openDrawer}>
+        <Box data-testid="navigation-component">
+            <StyledDrawer open={openDrawer} data-testid="drawer">
                 <StyledButtonBox>
-                    <StyledCloseButton onClick={handleToggleDrawer}>
+                    <StyledCloseButton
+                        onClick={handleToggleDrawer}
+                        data-testid="close-button"
+                    >
                         <StyledCloseButtonIcon />
                     </StyledCloseButton>
                 </StyledButtonBox>
@@ -37,7 +41,7 @@ const Navigation: React.FC = () => {
                     <List>
                         <ListItem>
                             <StyledLink to="/">
-                                <StyledListItemButton>
+                                <StyledListItemButton data-testid="currency-converter-link">
                                     <ListItemIcon>
                                         <StyledCurrencyExchangeIcon />
                                     </ListItemIcon>
@@ -48,7 +52,10 @@ const Navigation: React.FC = () => {
                             </StyledLink>
                         </ListItem>
                         <ListItem>
-                            <StyledLink to="/rates">
+                            <StyledLink
+                                to="/rates"
+                                data-testid="exchange-rates-link"
+                            >
                                 <StyledListItemButton>
                                     <ListItemIcon>
                                         <StyledPriceChangeIcon />
@@ -63,9 +70,9 @@ const Navigation: React.FC = () => {
                 </StyledListBox>
             </StyledDrawer>
             <StyledOpenButton onClick={handleToggleDrawer}>
-                <StyledOpenButtonIcon />
+                <StyledOpenButtonIcon data-testid="open-button" />
             </StyledOpenButton>
-        </>
+        </Box>
     );
 };
 
