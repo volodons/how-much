@@ -40,8 +40,11 @@ const Navigation: React.FC = () => {
                 <StyledListBox>
                     <List>
                         <ListItem>
-                            <StyledLink to="/">
-                                <StyledListItemButton data-testid="currency-converter-link">
+                            <StyledLink
+                                to="/"
+                                data-testid="currency-converter-link"
+                            >
+                                <StyledListItemButton>
                                     <ListItemIcon>
                                         <StyledCurrencyExchangeIcon />
                                     </ListItemIcon>

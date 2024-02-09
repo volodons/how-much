@@ -1,0 +1,252 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExchangeRatesPage component should match a snapshot 1`] = `
+Array [
+  <div
+    className="MuiBox-root css-0"
+    data-testid="navigation-component"
+  >
+    <button
+      className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1sg6drv-MuiButtonBase-root-MuiButton-root"
+      disabled={false}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onContextMenu={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-188uhum-MuiSvgIcon-root"
+        data-testid="open-button"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M3 18h18v-2H3zm0-5h18v-2H3zm0-7v2h18V6z"
+        />
+      </svg>
+    </button>
+  </div>,
+  <h1
+    className="MuiTypography-root MuiTypography-h1 css-1dha1by-MuiTypography-root"
+    data-testid="title-component"
+  >
+    How Much?
+  </h1>,
+  <div
+    className="MuiBox-root css-0"
+  >
+    <div
+      className="MuiBox-root css-rbet3"
+      data-testid="current-currency-component"
+    >
+      <h2
+        className="MuiTypography-root MuiTypography-h2 css-1tpbzme-MuiTypography-root"
+      >
+        Current Currency
+      </h2>
+      <form
+        action="#"
+        className="css-11mmnht"
+        onReset={[Function]}
+        onSubmit={[Function]}
+      >
+        <div
+          className="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+        >
+          <div
+            aria-owns={null}
+            className="MuiAutocomplete-root MuiAutocomplete-hasClearIcon MuiAutocomplete-hasPopupIcon css-1h51icj-MuiAutocomplete-root"
+            name="baseCurrency"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onMouseDown={[Function]}
+          >
+            <div
+              className="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-1mnimye-MuiFormControl-root-MuiTextField-root"
+            >
+              <label
+                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
+                data-shrink={false}
+                htmlFor=":r0:"
+                id=":r0:-label"
+              >
+                Choose Your Currency
+              </label>
+              <div
+                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-154xyx0-MuiInputBase-root-MuiOutlinedInput-root"
+                onClick={[Function]}
+              >
+                <input
+                  aria-activedescendant={null}
+                  aria-autocomplete="list"
+                  aria-expanded={false}
+                  aria-invalid={false}
+                  autoCapitalize="none"
+                  autoComplete="off"
+                  autoFocus={false}
+                  className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-nxo287-MuiInputBase-input-MuiOutlinedInput-input"
+                  id=":r0:"
+                  onAnimationStart={[Function]}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  onMouseDown={[Function]}
+                  readOnly={false}
+                  required={false}
+                  role="combobox"
+                  spellCheck="false"
+                  type="text"
+                  value=""
+                />
+                <div
+                  className="MuiAutocomplete-endAdornment css-1q60rmi-MuiAutocomplete-endAdornment"
+                >
+                  <button
+                    aria-label="Clear"
+                    className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium MuiAutocomplete-clearIndicator css-1glvl0p-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-clearIndicator"
+                    disabled={false}
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onContextMenu={[Function]}
+                    onDragLeave={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyUp={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseLeave={[Function]}
+                    onMouseUp={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                    tabIndex={-1}
+                    title="Clear"
+                    type="button"
+                  >
+                    <svg
+                      aria-hidden={true}
+                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                      data-testid="CloseIcon"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    aria-label="Open"
+                    className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium MuiAutocomplete-popupIndicator css-qzbt6i-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-popupIndicator"
+                    disabled={false}
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onContextMenu={[Function]}
+                    onDragLeave={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyUp={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseLeave={[Function]}
+                    onMouseUp={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                    tabIndex={-1}
+                    title="Open"
+                    type="button"
+                  >
+                    <svg
+                      aria-hidden={true}
+                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                      data-testid="ArrowDropDownIcon"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M7 10l5 5 5-5z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <fieldset
+                  aria-hidden={true}
+                  className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                >
+                  <legend
+                    className="css-yjsfm1"
+                  >
+                    <span>
+                      Choose Your Currency
+                    </span>
+                  </legend>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-bk4gzm-MuiButtonBase-root-MuiIconButton-root"
+          disabled={false}
+          onBlur={[Function]}
+          onContextMenu={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="submit"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1iq9u08-MuiSvgIcon-root"
+            data-testid="PriceChangeIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2m-8 6H8v1h3c.55 0 1 .45 1 1v3c0 .55-.45 1-1 1h-1v1H8v-1H6v-2h4v-1H7c-.55 0-1-.45-1-1V9c0-.55.45-1 1-1h1V7h2v1h2zm4 6.25-2-2h4zM14 10l2-2 2 2z"
+            />
+          </svg>
+          <span
+            className="MuiTypography-root MuiTypography-button css-xj5rr6-MuiTypography-root"
+          >
+            Fetch Rates
+          </span>
+        </button>
+      </form>
+    </div>
+    <div
+      className="MuiBox-root css-pw3vll"
+      data-testid="exchange-rates-component"
+    >
+      <h2
+        className="MuiTypography-root MuiTypography-h2 css-1oqg8so-MuiTypography-root"
+      >
+        Exchange Rates
+      </h2>
+      <div
+        className="MuiGrid-root MuiGrid-container css-11lq3yg-MuiGrid-root"
+      />
+    </div>
+  </div>,
+]
+`;

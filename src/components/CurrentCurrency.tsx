@@ -57,18 +57,39 @@ const CurrentCurrency: React.FC = () => {
         baseCurrency: baseCurrency || '',
     };
 
+    const inputOrOption = Yup.lazy((value) => {
+        if (typeof value === 'string' || typeof value === 'object') {
+            return Yup.mixed().required('This field is required');
+        }
+        return Yup.string().typeError(
+            'Value must be your input or one of suggested options in menu'
+        );
+    });
+
     return (
         <StyledBox data-testid="current-currency-component">
             <StyledTypography variant="h2">Current Currency</StyledTypography>
             <Formik
                 initialValues={initialValues}
                 onSubmit={(values) => {
-                    handleChangeBaseCurrency((values.baseCurrency as any).code);
+                    let selectedCurrencyCode = '';
+                    if (typeof values.baseCurrency === 'string') {
+                        const selectedCurrency = currencies.find(
+                            (currency) => currency.code === values.baseCurrency
+                        );
+                        selectedCurrencyCode = selectedCurrency
+                            ? selectedCurrency.code
+                            : '';
+                    } else {
+                        selectedCurrencyCode = (values.baseCurrency as Currency)
+                            .code;
+                    }
+                    if (selectedCurrencyCode) {
+                        handleChangeBaseCurrency(selectedCurrencyCode);
+                    }
                 }}
                 validationSchema={Yup.object().shape({
-                    baseCurrency: Yup.object().required(
-                        'This field is required'
-                    ),
+                    baseCurrency: inputOrOption,
                 })}
             >
                 <StyledForm>
@@ -79,7 +100,7 @@ const CurrentCurrency: React.FC = () => {
                                     {...field}
                                     options={currencies}
                                     getOptionLabel={(option: Currency) =>
-                                        option.code || ''
+                                        option.code || baseCurrency || ''
                                     }
                                     renderInput={(params) => (
                                         <StyledTextField
@@ -94,7 +115,7 @@ const CurrentCurrency: React.FC = () => {
                                     )}
                                     onChange={(
                                         event: React.ChangeEvent<{}>,
-                                        value: Currency | null
+                                        value: Currency | string | null
                                     ) => {
                                         form.setFieldValue(
                                             'baseCurrency',

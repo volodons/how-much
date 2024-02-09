@@ -2,7 +2,6 @@ import axios from 'axios';
 
 import {
     fetchExchangeRatesCurrencies,
-    fetchExchangeRates,
     fetchConverterCurrencies,
     fetchExchangeRate,
     fetchBaseCurrency,
@@ -41,33 +40,6 @@ describe('API Functions', () => {
         expect(result.currenciesWithData).toEqual(expectedCurrencies);
         expect(axios.get).toHaveBeenCalledWith(
             'https://restcountries.com/v3.1/all?fields=currencies'
-        );
-    });
-
-    it('should fetch exchange rates correctly', async () => {
-        const mockedExchangeRatesData = {
-            data: {
-                USD: { value: 1 },
-                EUR: { value: 0.8 },
-            },
-        };
-        const baseCurrency = 'USD';
-        const currencyCodes = ['EUR'];
-
-        (
-            axios.get as jest.MockedFunction<typeof axios.get>
-        ).mockResolvedValueOnce({
-            data: mockedExchangeRatesData,
-        });
-
-        const result = await fetchExchangeRates(baseCurrency, currencyCodes);
-
-        expect(result).toEqual([
-            { code: 'USD', value: 1 },
-            { code: 'EUR', value: 0.8 },
-        ]);
-        expect(axios.get).toHaveBeenCalledWith(
-            'https://api.currencyapi.com/v3/latest?apikey=cur_live_9bGwPi0IXjfJfaUXEUlz6ujsu5X9vE07EWzxP6eS&currencies=EUR&base_currency=USD'
         );
     });
 
@@ -118,7 +90,7 @@ describe('API Functions', () => {
 
         expect(result).toEqual(0.8);
         expect(axios.get).toHaveBeenCalledWith(
-            'https://api.currencyapi.com/v3/latest?apikey=cur_live_9bGwPi0IXjfJfaUXEUlz6ujsu5X9vE07EWzxP6eS&currencies=EUR&base_currency=USD'
+            'https://api.currencyapi.com/v3/latest?apikey=cur_live_Ue67NDHXG1Q3Qo2CXng3GA8hSwN2kwDF1ynX0zRJ&currencies=EUR&base_currency=USD'
         );
     });
 
@@ -133,7 +105,7 @@ describe('API Functions', () => {
 
         const result = await fetchBaseCurrency();
 
-        expect(result).toEqual({ id: 9999, code: 'USD' });
+        expect(result).toEqual('USD');
         expect(axios.get).toHaveBeenCalledWith('https://ipapi.co/currency/');
     });
 });

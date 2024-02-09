@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 const FETCH_CURRENCIES_URL: string =
     'https://restcountries.com/v3.1/all?fields=currencies';
 const FETCH_EXCHANGE_RATES_URL: string =
-    'https://api.currencyapi.com/v3/latest?apikey=cur_live_9bGwPi0IXjfJfaUXEUlz6ujsu5X9vE07EWzxP6eS';
+    'https://api.currencyapi.com/v3/latest?apikey=cur_live_Ue67NDHXG1Q3Qo2CXng3GA8hSwN2kwDF1ynX0zRJ';
 const FETCH_BASE_CURRENCY_URL: string = 'https://ipapi.co/currency/';
 
 interface Currency {
@@ -104,13 +104,10 @@ export const fetchExchangeRate = async (
     return exchangeRate;
 };
 
-export const fetchBaseCurrency = async (): Promise<Currency> => {
+export const fetchBaseCurrency = async (): Promise<string> => {
     const baseCurrencyResponse: AxiosResponse<string> = await axios.get(
         FETCH_BASE_CURRENCY_URL
     );
-    const baseCurrency: Currency = {
-        id: 9999,
-        code: baseCurrencyResponse.data,
-    };
+    const baseCurrency = baseCurrencyResponse.data;
     return baseCurrency;
 };

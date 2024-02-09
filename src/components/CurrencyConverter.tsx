@@ -47,10 +47,14 @@ const CurrencyConverter: React.FC = () => {
     );
 
     const handleConvertCurrency = (values: Values) => {
+        const baseCurrencyCode =
+            typeof values.baseCurrency === 'string'
+                ? values.baseCurrency
+                : (values.baseCurrency as Currency).code;
         dispatch({
             type: converterActions.FETCH_EXCHANGE_RATE.type,
             payload: {
-                baseCurrency: (values.baseCurrency as Currency).code,
+                baseCurrency: baseCurrencyCode,
                 targetCurrency: (values.targetCurrency as Currency).code,
             },
         });
@@ -70,6 +74,15 @@ const CurrencyConverter: React.FC = () => {
         targetCurrency: '',
         targetCurrencyAmount: targetCurrencyAmount || 0,
     };
+
+    const inputOrOption = Yup.lazy((value) => {
+        if (typeof value === 'string' || typeof value === 'object') {
+            return Yup.mixed().required('This field is required');
+        }
+        return Yup.string().typeError(
+            'Value must be your input or one of suggested options in menu'
+        );
+    });
 
     return (
         <Box data-testid="currency-converter-component">
@@ -99,9 +112,7 @@ const CurrencyConverter: React.FC = () => {
                                     'Number must be greater than or equal to 0.1'
                                 )
                                 .required('This field is required'),
-                            baseCurrency: Yup.object().required(
-                                'This field is required'
-                            ),
+                            baseCurrency: inputOrOption,
                             targetCurrency: Yup.object().required(
                                 'This field is required'
                             ),
@@ -135,7 +146,11 @@ const CurrencyConverter: React.FC = () => {
                                                     options={currencies}
                                                     getOptionLabel={(
                                                         option: Currency
-                                                    ) => option.code || ''}
+                                                    ) =>
+                                                        option.code ||
+                                                        baseCurrency ||
+                                                        ''
+                                                    }
                                                     renderInput={(params) => (
                                                         <StyledTextField
                                                             {...params}
@@ -155,7 +170,10 @@ const CurrencyConverter: React.FC = () => {
                                                     )}
                                                     onChange={(
                                                         event: React.ChangeEvent<{}>,
-                                                        value: Currency | null
+                                                        value:
+                                                            | Currency
+                                                            | string
+                                                            | null
                                                     ) => {
                                                         if (value) {
                                                             form.setFieldValue(

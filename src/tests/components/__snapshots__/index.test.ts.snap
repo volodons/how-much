@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`index.ts should export CurrencyConverter component 1`] = `[Function]`;
+
+exports[`index.ts should export CurrentCurrency component 1`] = `[Function]`;
+
+exports[`index.ts should export ExchangeRates component 1`] = `[Function]`;
+
+exports[`index.ts should export Navigation component 1`] = `[Function]`;
+
+exports[`index.ts should export Title component 1`] = `[Function]`;

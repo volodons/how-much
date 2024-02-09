@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
 
 import store from '../redux';
@@ -17,5 +18,15 @@ describe('App Component', () => {
         ).toBeInTheDocument();
     });
 
-    it('should navigate to Exchange Rates page when the corresponding route is accessed', () => {});
+    it('should match snapshot', () => {
+        const tree = renderer
+            .create(
+                <Provider store={store}>
+                    <App />
+                </Provider>
+            )
+            .toJSON();
+
+        expect(tree).toMatchSnapshot();
+    });
 });

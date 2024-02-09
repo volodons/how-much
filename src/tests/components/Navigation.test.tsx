@@ -1,45 +1,108 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import {
+    render,
+    screen,
+    fireEvent,
+    act,
+    waitFor,
+} from '@testing-library/react';
+import renderer from 'react-test-renderer';
+import { MemoryRouter } from 'react-router-dom';
 
 import Navigation from '../../components/Navigation';
 
 describe('Navigation component', () => {
+    it('should be a functional component', () => {
+        expect(Navigation).toBeInstanceOf(Function);
+    });
+
     it('should render without errors', () => {
         render(<Navigation />);
         const openButton = screen.getByTestId('open-button');
         expect(openButton).toBeInTheDocument();
     });
 
-    it('should open and close the drawer when open button is clicked', () => {
-        render(<Navigation />);
+    it('should open the drawer when open button is clicked', () => {
+        render(
+            <MemoryRouter>
+                <Navigation />
+            </MemoryRouter>
+        );
         const openButton = screen.getByTestId('open-button');
+
         act(() => {
             fireEvent.click(openButton);
         });
+
         const drawer = screen.getByTestId('drawer');
-        expect(drawer).toHaveClass(
-            'MuiDrawer-root',
-            'MuiDrawer-modal',
-            'MuiDrawer-paper'
+        expect(drawer).toBeInTheDocument();
+    });
+
+    it('should close the drawer when close button is clicked', async () => {
+        render(
+            <MemoryRouter>
+                <Navigation />
+            </MemoryRouter>
         );
-        fireEvent.click(openButton);
-        expect(drawer).not.toBeVisible();
+        const openButton = screen.getByTestId('open-button');
+
+        act(() => {
+            fireEvent.click(openButton);
+        });
+
+        const drawer = screen.getByTestId('drawer');
+        const closeButton = screen.getByTestId('close-button');
+
+        act(() => {
+            fireEvent.click(closeButton);
+        });
+
+        await waitFor(() => {
+            expect(drawer).not.toBeInTheDocument();
+        });
     });
 
     it('should display navigation links', () => {
-        render(<Navigation />);
+        render(
+            <MemoryRouter>
+                <Navigation />
+            </MemoryRouter>
+        );
+        const openButton = screen.getByTestId('open-button');
+
+        act(() => {
+            fireEvent.click(openButton);
+        });
+
         const currencyConverterLink = screen.getByTestId(
             'currency-converter-link'
         );
-        const exchangeRatesLink = screen.getByTestId('exchange-rates-click');
+        const exchangeRatesLink = screen.getByTestId('exchange-rates-link');
+
         expect(currencyConverterLink).toBeInTheDocument();
         expect(exchangeRatesLink).toBeInTheDocument();
     });
 
     it('should navigate to correct routes when links are clicked', () => {
-        render(<Navigation />);
+        render(
+            <MemoryRouter>
+                <Navigation />
+            </MemoryRouter>
+        );
+        const openButton = screen.getByTestId('open-button');
+
+        act(() => {
+            fireEvent.click(openButton);
+        });
+
         const currencyConverterLink = screen.getByText('Currency Converter');
         const exchangeRatesLink = screen.getByText('Exchange Rates');
+
         fireEvent.click(currencyConverterLink);
         fireEvent.click(exchangeRatesLink);
+    });
+
+    it('should match a snapshot', () => {
+        const tree = renderer.create(<Navigation />).toJSON();
+        expect(tree).toMatchSnapshot();
     });
 });

@@ -69,6 +69,7 @@ const ExchangeRates: React.FC = () => {
                                                 currency
                                             )
                                         }
+                                        data-testid="unstar-button"
                                     >
                                         <StyledStarIcon />
                                     </StyledButton>
@@ -92,7 +93,7 @@ const ExchangeRates: React.FC = () => {
                                                 currency
                                             )
                                         }
-                                        data-testid="star-icon-button"
+                                        data-testid="star-button"
                                     >
                                         <StyledStarOutlineIcon />
                                     </StyledButton>

@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CurrencyConverterPage component should match a snapshot 1`] = `
+<div
+  className="MuiBox-root css-0"
+  data-testid="currency-converter-page"
+>
+  <div
+    className="MuiBox-root css-0"
+    data-testid="navigation-component"
+  >
+    <button
+      className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1sg6drv-MuiButtonBase-root-MuiButton-root"
+      disabled={false}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onContextMenu={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-188uhum-MuiSvgIcon-root"
+        data-testid="open-button"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M3 18h18v-2H3zm0-5h18v-2H3zm0-7v2h18V6z"
+        />
+      </svg>
+    </button>
+  </div>
+  <h1
+    className="MuiTypography-root MuiTypography-h1 css-1dha1by-MuiTypography-root"
+    data-testid="title-component"
+  >
+    How Much?
+  </h1>
+  <div
+    className="MuiBox-root css-0"
+    data-testid="currency-converter-component"
+  >
+    <div
+      className="MuiBox-root css-15z49vq"
+    >
+      <span
+        className="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-16yyvdj-MuiCircularProgress-root"
+        role="progressbar"
+        style={
+          Object {
+            "height": "5rem",
+            "width": "5rem",
+          }
+        }
+      >
+        <svg
+          className="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+          viewBox="22 22 44 44"
+        >
+          <circle
+            className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+            cx={44}
+            cy={44}
+            fill="none"
+            r={20.2}
+            strokeWidth={3.6}
+            style={Object {}}
+          />
+        </svg>
+      </span>
+    </div>
+  </div>
+</div>
+`;
