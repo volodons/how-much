@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
 import {
@@ -7,7 +7,33 @@ import {
     fetchBaseCurrency,
 } from '../../api';
 
-const initialState = {
+interface Currency {
+    id: number;
+    code: string;
+    exchangeRate: number;
+    featured: boolean;
+}
+
+interface ExchangeRatesCurrenciesResponse {
+    currenciesWithData: Currency[];
+    filteredCurrencyCodes: string[];
+}
+
+interface ExchangeRates {
+    [currencyCode: string]: {
+        code: string;
+        value: number;
+    };
+}
+
+interface CurrenciesState {
+    currencies: Currency[];
+    currencyCodes: string[];
+    baseCurrency: string;
+    error: string | null;
+}
+
+const initialState: CurrenciesState = {
     currencies: [],
     currencyCodes: [],
     baseCurrency: '',
@@ -19,31 +45,39 @@ const currenciesSlice = createSlice({
     initialState,
     reducers: {
         FETCH_CURRENCIES: (state) => state,
-        FETCH_CURRENCIES_FAILURE: (state, action) => {
+        FETCH_CURRENCIES_FAILURE: (state, action: PayloadAction<string>) => {
             state.error = action.payload;
         },
-        SET_CURRENCIES: (state, action) => {
+        SET_CURRENCIES: (
+            state,
+            action: PayloadAction<ExchangeRatesCurrenciesResponse>
+        ) => {
             state.currencies = [...action.payload.currenciesWithData];
             state.currencyCodes = [...action.payload.filteredCurrencyCodes];
         },
         FETCH_BASE_CURRENCY: (state) => state,
-        FETCH_BASE_CURRENCY_FAILURE: (state, action) => {
+        FETCH_BASE_CURRENCY_FAILURE: (state, action: PayloadAction<string>) => {
             state.error = action.payload;
         },
-        SET_BASE_CURRENCY: (state, action) => {
+        SET_BASE_CURRENCY: (state, action: PayloadAction<string>) => {
             state.baseCurrency = action.payload;
         },
         FETCH_EXCHANGE_RATES: (state) => state,
-        FETCH_EXCHANGE_RATES_FAILURE: (state, action) => {
+        FETCH_EXCHANGE_RATES_FAILURE: (
+            state,
+            action: PayloadAction<string>
+        ) => {
             state.error = action.payload;
         },
-        SET_EXCHANGE_RATES: (state, action) => {
-            Object.entries(action.payload).forEach(([code, currency]) => {
+        SET_EXCHANGE_RATES: (state, action: PayloadAction<ExchangeRates>) => {
+            Object.values(action.payload).forEach((currency) => {
                 const currencyToUpdate = state.currencies.find(
-                    (item) => item.code === code
+                    (item) => item.code === currency.code
                 );
                 if (currencyToUpdate) {
-                    currencyToUpdate.exchangeRate = currency.value.toFixed(2);
+                    currencyToUpdate.exchangeRate = parseFloat(
+                        currency.value.toFixed(2)
+                    );
                 }
             });
         },
@@ -74,10 +108,16 @@ const currenciesSlice = createSlice({
 
 function* fetchCurrenciesSaga() {
     try {
-        const response = yield call(fetchExchangeRatesCurrencies);
+        const response: ExchangeRatesCurrenciesResponse = yield call(
+            fetchExchangeRatesCurrencies
+        );
         yield put(currenciesActions.SET_CURRENCIES(response));
     } catch (error) {
-        yield put(currenciesActions.FETCH_CURRENCIES_FAILURE(error.message));
+        if (error instanceof Error) {
+            yield put(
+                currenciesActions.FETCH_CURRENCIES_FAILURE(error.message)
+            );
+        }
     }
 }
 
@@ -87,10 +127,14 @@ export function* watchCurrencies() {
 
 function* fetchBaseCurrencySaga() {
     try {
-        const response = yield call(fetchBaseCurrency);
+        const response: string = yield call(fetchBaseCurrency);
         yield put(currenciesActions.SET_BASE_CURRENCY(response));
     } catch (error) {
-        yield put(currenciesActions.FETCH_BASE_CURRENCY_FAILURE(error.message));
+        if (error instanceof Error) {
+            yield put(
+                currenciesActions.FETCH_BASE_CURRENCY_FAILURE(error.message)
+            );
+        }
     }
 }
 
@@ -101,25 +145,32 @@ export function* watchBaseCurrency() {
     );
 }
 
-function* fetchExchangeRatesSaga(action) {
+function* fetchExchangeRatesSaga(
+    action: PayloadAction<{
+        baseCurrency: string;
+        currencyCodes: string[];
+    }>
+) {
     const { baseCurrency, currencyCodes } = action.payload;
     try {
-        const response = yield call(
+        const response: ExchangeRates = yield call(
             fetchExchangeRates,
-            baseCurrency.code,
+            baseCurrency,
             currencyCodes
         );
         yield put(currenciesActions.SET_EXCHANGE_RATES(response));
     } catch (error) {
-        yield put(
-            currenciesActions.FETCH_EXCHANGE_RATES_FAILURE(error.message)
-        );
+        if (error instanceof Error) {
+            yield put(
+                currenciesActions.FETCH_EXCHANGE_RATES_FAILURE(error.message)
+            );
+        }
     }
 }
 
 export function* watchExchangeRates() {
     yield takeLatest(
-        currenciesActions.FETCH_EXCHANGE_RATES,
+        currenciesActions.FETCH_EXCHANGE_RATES.type,
         fetchExchangeRatesSaga
     );
 }

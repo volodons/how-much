@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Title component should match a snapshot 1`] = `
+<h1
+  className="MuiTypography-root MuiTypography-h1 css-1dha1by-MuiTypography-root"
+  data-testid="title-component"
+>
+  How Much?
+</h1>
+`;

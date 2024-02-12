@@ -1,3 +1,4 @@
+import React from 'react';
 import Box from '@mui/material/Box';
 
 import {
@@ -7,7 +8,7 @@ import {
     Title,
 } from '../components';
 
-const ExchangeRatesPage = () => (
+const ExchangeRatesPage: React.FC = () => (
     <>
         <Navigation />
         <Title />

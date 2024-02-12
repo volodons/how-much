@@ -1,4 +1,4 @@
-export const COLORS = {
+export const COLORS: Record<string, string> = {
     WHITE: '#f5f7ff',
     BLUE: '#0390fc',
     PURPLE: '#562fff',
@@ -9,7 +9,7 @@ export const COLORS = {
     BLACK_LEAST_TRANSPARENT: 'rgba(0, 0, 0, 0.5)',
 };
 
-export const MEDIA_QUERIES = {
+export const MEDIA_QUERIES: Record<string, string> = {
     XS: '600px',
     S: '800px',
     M: '900px',

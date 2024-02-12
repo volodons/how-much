@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@mui/material/Grid';
 
+import { RootState } from '../redux';
 import { currenciesActions } from '../redux/ducks/currenciesDuck';
 import {
     StyledBox,
@@ -13,20 +14,27 @@ import {
     StyledStarOutlineIcon,
 } from '../styled/styledExchangeRates';
 
-const ExchangeRates = () => {
+interface Currency {
+    id: number;
+    code: string;
+    exchangeRate: number;
+    featured: boolean;
+}
+
+const ExchangeRates: React.FC = () => {
     const dispatch = useDispatch();
     const { currencyCodes, currencies, baseCurrency } = useSelector(
-        (state) => state.currencies
+        (state: RootState) => state.currencies
     );
 
-    const handleAddToFeaturedCurrencies = (currency) => {
+    const handleAddToFeaturedCurrencies = (currency: Currency) => {
         dispatch({
             type: currenciesActions.ADD_TO_FEATURED_CURRENCIES.type,
             payload: currency,
         });
     };
 
-    const handleRemoveFromFeaturedCurrencies = (currency) => {
+    const handleRemoveFromFeaturedCurrencies = (currency: Currency) => {
         dispatch({
             type: currenciesActions.REMOVE_FROM_FEATURED_CURRENCIES.type,
             payload: currency,
@@ -45,13 +53,13 @@ const ExchangeRates = () => {
     }, [baseCurrency]);
 
     return (
-        <StyledBox>
+        <StyledBox data-testid="exchange-rates-component">
             <StyledTypographyHeading variant="h2">
                 Exchange Rates
             </StyledTypographyHeading>
             <Grid container>
                 {baseCurrency &&
-                    currencies.map((currency) =>
+                    currencies.map((currency: Currency) =>
                         currency.featured ? (
                             <StyledGrid container key={currency.id}>
                                 <Grid item>
@@ -61,6 +69,7 @@ const ExchangeRates = () => {
                                                 currency
                                             )
                                         }
+                                        data-testid="unstar-button"
                                     >
                                         <StyledStarIcon />
                                     </StyledButton>
@@ -74,7 +83,7 @@ const ExchangeRates = () => {
                         ) : null
                     )}
                 {baseCurrency &&
-                    currencies.map((currency) =>
+                    currencies.map((currency: Currency) =>
                         !currency.featured ? (
                             <StyledGrid container key={currency.id}>
                                 <Grid item>
@@ -84,6 +93,7 @@ const ExchangeRates = () => {
                                                 currency
                                             )
                                         }
+                                        data-testid="star-button"
                                     >
                                         <StyledStarOutlineIcon />
                                     </StyledButton>

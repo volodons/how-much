@@ -1,3 +1,4 @@
+import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -7,7 +8,7 @@ import ExchangeRatesPage from './pages/ExchangeRatesPage';
 import store from './redux';
 import { StyledApp } from './styled/styledApp';
 
-const App = () => (
+const App: React.FC = () => (
     <>
         <Provider store={store}>
             <StyledApp />
