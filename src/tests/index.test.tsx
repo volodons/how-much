@@ -7,7 +7,7 @@ import App from '../App';
 
 describe('Index Component', () => {
     it('should render the application without errors', () => {
-        let root: any;
+        let root: HTMLElement;
 
         act(() => {
             root = document.createElement('div');

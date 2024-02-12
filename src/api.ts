@@ -27,6 +27,14 @@ interface ExchangeRate {
     value: number;
 }
 
+interface ExchangeRateData {
+    data: {
+        [currencyCode: string]: {
+            value: number;
+        };
+    };
+}
+
 interface ExchangeRates {
     [currencyCode: string]: ExchangeRate;
 }
@@ -95,13 +103,25 @@ export const fetchExchangeRate = async (
     baseCurrency: string,
     targetCurrency: string
 ): Promise<number> => {
-    const exchangeRateResponse: AxiosResponse<any> = await axios.get(
-        `${FETCH_EXCHANGE_RATES_URL}&currencies=${targetCurrency}&base_currency=${baseCurrency}`
-    );
-    const exchangeRateData: any = exchangeRateResponse.data.data;
-    const key: string = Object.keys(exchangeRateData)[0];
-    const exchangeRate: number = exchangeRateData[key].value;
-    return exchangeRate;
+    try {
+        const exchangeRateResponse: AxiosResponse<ExchangeRateData> =
+            await axios.get(
+                `${FETCH_EXCHANGE_RATES_URL}&currencies=${targetCurrency}&base_currency=${baseCurrency}`
+            );
+
+        const exchangeRateData: ExchangeRateData = exchangeRateResponse.data;
+        const exchangeRateValue: number | undefined =
+            exchangeRateData.data[targetCurrency]?.value;
+
+        if (exchangeRateValue === undefined) {
+            throw new Error(`Exchange rate for ${targetCurrency} not found`);
+        }
+
+        return exchangeRateValue;
+    } catch (error) {
+        console.error('Error fetching exchange rate:', error);
+        return 0;
+    }
 };
 
 export const fetchBaseCurrency = async (): Promise<string> => {

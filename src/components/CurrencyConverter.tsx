@@ -3,7 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import {
+    Formik,
+    Form,
+    Field,
+    ErrorMessage,
+    FieldProps,
+    FormikProps,
+} from 'formik';
 import * as Yup from 'yup';
 
 import { RootState } from '../redux';
@@ -27,8 +34,8 @@ import {
 interface Currency {
     id: number;
     code: string;
-    exchangeRate: number;
-    featured: boolean;
+    exchangeRate?: number;
+    featured?: boolean;
 }
 interface Values {
     baseCurrency: Currency | string;
@@ -138,8 +145,8 @@ const CurrencyConverter: React.FC = () => {
                                                 field,
                                                 form,
                                             }: {
-                                                field: any;
-                                                form: any;
+                                                field: FieldProps['field'];
+                                                form: FormikProps<Values>;
                                             }) => (
                                                 <Autocomplete
                                                     {...field}
@@ -172,7 +179,7 @@ const CurrencyConverter: React.FC = () => {
                                                         event: React.ChangeEvent<{}>,
                                                         value:
                                                             | Currency
-                                                            | string
+                                                            | Currency[]
                                                             | null
                                                     ) => {
                                                         if (value) {
@@ -198,8 +205,8 @@ const CurrencyConverter: React.FC = () => {
                                                 field,
                                                 form,
                                             }: {
-                                                field: any;
-                                                form: any;
+                                                field: FieldProps['field'];
+                                                form: FormikProps<Values>;
                                             }) => (
                                                 <Autocomplete
                                                     {...field}
@@ -226,7 +233,10 @@ const CurrencyConverter: React.FC = () => {
                                                     )}
                                                     onChange={(
                                                         event: React.ChangeEvent<{}>,
-                                                        value: Currency | null
+                                                        value:
+                                                            | Currency
+                                                            | Currency[]
+                                                            | null
                                                     ) => {
                                                         if (value) {
                                                             form.setFieldValue(

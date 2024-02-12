@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { Formik, Field, ErrorMessage } from 'formik';
+import { Formik, Field, ErrorMessage, FieldProps, FormikProps } from 'formik';
 import * as Yup from 'yup';
 
 import { RootState } from '../redux';
@@ -95,7 +95,13 @@ const CurrentCurrency: React.FC = () => {
                 <StyledForm>
                     <Grid item>
                         <Field name="baseCurrency">
-                            {({ field, form }: { field: any; form: any }) => (
+                            {({
+                                field,
+                                form,
+                            }: {
+                                field: FieldProps['field'];
+                                form: FormikProps<Values>;
+                            }) => (
                                 <Autocomplete
                                     {...field}
                                     options={currencies}
@@ -115,7 +121,7 @@ const CurrentCurrency: React.FC = () => {
                                     )}
                                     onChange={(
                                         event: React.ChangeEvent<{}>,
-                                        value: Currency | string | null
+                                        value: Currency | Currency[] | null
                                     ) => {
                                         form.setFieldValue(
                                             'baseCurrency',

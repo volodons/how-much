@@ -1,13 +1,43 @@
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import renderer from 'react-test-renderer';
-import configureMockStore from 'redux-mock-store';
+import configureMockStore, { MockStoreEnhanced } from 'redux-mock-store';
 import { Provider } from 'react-redux';
 
 import { currenciesActions } from '../../redux/ducks/currenciesDuck';
 import ExchangeRates from '../../components/ExchangeRates';
 
-const createMockStore = configureMockStore();
-const mockInitialState = {
+interface Currency {
+    id: number;
+    code: string;
+    exchangeRate: number;
+    featured: boolean;
+}
+
+interface CurrenciesState {
+    currencies: Currency[];
+    currencyCodes: string[];
+    baseCurrency: Currency;
+    error: string | null;
+}
+
+interface ConverterState {
+    currencies: Currency[];
+    baseCurrency: Currency;
+    baseCurrencyAmount: number;
+    targetCurrency: string;
+    targetCurrencyAmount: number;
+    exchangeRate: number;
+    error: string | null;
+}
+
+interface MockState {
+    currencies: CurrenciesState;
+    converter: ConverterState;
+}
+
+const createMockStore = configureMockStore<MockState>();
+
+const mockInitialState: MockState = {
     converter: {
         currencies: [],
         baseCurrency: { id: 1, code: 'UAH', exchangeRate: 1, featured: true },
@@ -27,8 +57,9 @@ const mockInitialState = {
         error: null,
     },
 };
-const mockStore = createMockStore(mockInitialState);
-const mockState = (mockStore as any).getState();
+const mockStore: MockStoreEnhanced<MockState> =
+    createMockStore(mockInitialState);
+const mockState = mockStore.getState();
 
 describe('ExchangeRates component', () => {
     it('should be a functional component', () => {
