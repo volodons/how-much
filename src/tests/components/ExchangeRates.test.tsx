@@ -71,11 +71,9 @@ describe('ExchangeRates component', () => {
         });
     });
 
-    it('should load currencies and exchange rates on mount', async () => {
+    it('should load currencies on mount', async () => {
         const mockDispatch = jest.fn();
         mockStore.dispatch = mockDispatch;
-
-        const { baseCurrency, currencyCodes } = mockState.currencies;
 
         render(
             <Provider store={mockStore}>
@@ -88,6 +86,19 @@ describe('ExchangeRates component', () => {
                 type: currenciesActions.FETCH_CURRENCIES.type,
             });
         });
+    });
+
+    it('should load exchange rates on mount', async () => {
+        const mockDispatch = jest.fn();
+        mockStore.dispatch = mockDispatch;
+
+        const { baseCurrency, currencyCodes } = mockState.currencies;
+
+        render(
+            <Provider store={mockStore}>
+                <ExchangeRates />
+            </Provider>
+        );
 
         await waitFor(() => {
             expect(mockDispatch).toHaveBeenCalledWith({

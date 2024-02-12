@@ -1,6 +1,9 @@
 import axios from 'axios';
 
 import {
+    FETCH_CURRENCIES_URL,
+    FETCH_EXCHANGE_RATES_URL,
+    FETCH_BASE_CURRENCY_URL,
     fetchExchangeRatesCurrencies,
     fetchConverterCurrencies,
     fetchExchangeRate,
@@ -14,7 +17,29 @@ describe('API Functions', () => {
         jest.clearAllMocks();
     });
 
-    it('should fetch currencies for exchange rates correctly', async () => {
+    it('should fetch currencies for exchange rates correctly - filteredCurrencyCodes', async () => {
+        const mockedCurrenciesData = [
+            {
+                currencies: {
+                    USD: { name: 'United States Dollar', symbol: '$' },
+                },
+            },
+            { currencies: { EUR: { name: 'Euro', symbol: '€' } } },
+        ];
+        const expectedCurrencies = ['USD', 'EUR'];
+
+        (
+            axios.get as jest.MockedFunction<typeof axios.get>
+        ).mockResolvedValueOnce({
+            data: mockedCurrenciesData,
+        });
+
+        const result = await fetchExchangeRatesCurrencies();
+
+        expect(result.filteredCurrencyCodes).toEqual(expectedCurrencies);
+    });
+
+    it('should fetch currencies for exchange rates correctly - currenciesWithData', async () => {
         const mockedCurrenciesData = [
             {
                 currencies: {
@@ -36,11 +61,28 @@ describe('API Functions', () => {
 
         const result = await fetchExchangeRatesCurrencies();
 
-        expect(result.filteredCurrencyCodes).toEqual(['USD', 'EUR']);
         expect(result.currenciesWithData).toEqual(expectedCurrencies);
-        expect(axios.get).toHaveBeenCalledWith(
-            'https://restcountries.com/v3.1/all?fields=currencies'
-        );
+    });
+
+    it('should fetch currencies for exchange rates correctly - Axios API Get Request', async () => {
+        const mockedCurrenciesData = [
+            {
+                currencies: {
+                    USD: { name: 'United States Dollar', symbol: '$' },
+                },
+            },
+            { currencies: { EUR: { name: 'Euro', symbol: '€' } } },
+        ];
+
+        (
+            axios.get as jest.MockedFunction<typeof axios.get>
+        ).mockResolvedValueOnce({
+            data: mockedCurrenciesData,
+        });
+
+        await fetchExchangeRatesCurrencies();
+
+        expect(axios.get).toHaveBeenCalledWith(FETCH_CURRENCIES_URL);
     });
 
     it('should fetch converter currencies correctly', async () => {
@@ -66,9 +108,7 @@ describe('API Functions', () => {
         const result = await fetchConverterCurrencies();
 
         expect(result).toEqual(expectedCurrencies);
-        expect(axios.get).toHaveBeenCalledWith(
-            'https://restcountries.com/v3.1/all?fields=currencies'
-        );
+        expect(axios.get).toHaveBeenCalledWith(FETCH_CURRENCIES_URL);
     });
 
     it('should fetch exchange rate correctly', async () => {
@@ -79,6 +119,7 @@ describe('API Functions', () => {
         };
         const baseCurrency = 'USD';
         const targetCurrency = 'EUR';
+        const expectedExchangeRate = 0.8;
 
         (
             axios.get as jest.MockedFunction<typeof axios.get>
@@ -88,14 +129,15 @@ describe('API Functions', () => {
 
         const result = await fetchExchangeRate(baseCurrency, targetCurrency);
 
-        expect(result).toEqual(0.8);
+        expect(result).toEqual(expectedExchangeRate);
         expect(axios.get).toHaveBeenCalledWith(
-            'https://api.currencyapi.com/v3/latest?apikey=cur_live_Ue67NDHXG1Q3Qo2CXng3GA8hSwN2kwDF1ynX0zRJ&currencies=EUR&base_currency=USD'
+            `${FETCH_EXCHANGE_RATES_URL}&currencies=${targetCurrency}&base_currency=${baseCurrency}`
         );
     });
 
     it('should fetch base currency correctly', async () => {
         const mockedBaseCurrencyData = 'USD';
+        const expectedBaseCurrency = 'USD';
 
         (
             axios.get as jest.MockedFunction<typeof axios.get>
@@ -105,7 +147,7 @@ describe('API Functions', () => {
 
         const result = await fetchBaseCurrency();
 
-        expect(result).toEqual('USD');
-        expect(axios.get).toHaveBeenCalledWith('https://ipapi.co/currency/');
+        expect(result).toEqual(expectedBaseCurrency);
+        expect(axios.get).toHaveBeenCalledWith(FETCH_BASE_CURRENCY_URL);
     });
 });

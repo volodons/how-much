@@ -53,7 +53,7 @@ describe('CurrencyConverter component', () => {
         });
     });
 
-    it('should dispatch action to fetch currencies and base currency on mount', async () => {
+    it('should dispatch action to fetch currencies on mount', async () => {
         const mockDispatch = jest.fn();
         mockStore.dispatch = mockDispatch;
 
@@ -70,6 +70,17 @@ describe('CurrencyConverter component', () => {
                 })
             );
         });
+    });
+
+    it('should dispatch action to fetch base currency on mount', async () => {
+        const mockDispatch = jest.fn();
+        mockStore.dispatch = mockDispatch;
+
+        render(
+            <Provider store={mockStore}>
+                <CurrencyConverter />
+            </Provider>
+        );
 
         await waitFor(() => {
             expect(mockDispatch).toHaveBeenCalledWith(

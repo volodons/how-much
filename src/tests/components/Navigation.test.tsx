@@ -61,7 +61,7 @@ describe('Navigation component', () => {
         });
     });
 
-    it('should display navigation links', () => {
+    it('should display Currency Converter page navigation link', () => {
         render(
             <MemoryRouter>
                 <Navigation />
@@ -76,9 +76,24 @@ describe('Navigation component', () => {
         const currencyConverterLink = screen.getByTestId(
             'currency-converter-link'
         );
-        const exchangeRatesLink = screen.getByTestId('exchange-rates-link');
 
         expect(currencyConverterLink).toBeInTheDocument();
+    });
+
+    it('should display Exchange Rates page navigation link', () => {
+        render(
+            <MemoryRouter>
+                <Navigation />
+            </MemoryRouter>
+        );
+        const openButton = screen.getByTestId('open-button');
+
+        act(() => {
+            fireEvent.click(openButton);
+        });
+
+        const exchangeRatesLink = screen.getByTestId('exchange-rates-link');
+
         expect(exchangeRatesLink).toBeInTheDocument();
     });
 

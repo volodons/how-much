@@ -112,8 +112,12 @@ function* fetchCurrenciesSaga() {
             fetchExchangeRatesCurrencies
         );
         yield put(currenciesActions.SET_CURRENCIES(response));
-    } catch (error: any) {
-        yield put(currenciesActions.FETCH_CURRENCIES_FAILURE(error.message));
+    } catch (error) {
+        if (error instanceof Error) {
+            yield put(
+                currenciesActions.FETCH_CURRENCIES_FAILURE(error.message)
+            );
+        }
     }
 }
 
@@ -125,8 +129,12 @@ function* fetchBaseCurrencySaga() {
     try {
         const response: string = yield call(fetchBaseCurrency);
         yield put(currenciesActions.SET_BASE_CURRENCY(response));
-    } catch (error: any) {
-        yield put(currenciesActions.FETCH_BASE_CURRENCY_FAILURE(error.message));
+    } catch (error) {
+        if (error instanceof Error) {
+            yield put(
+                currenciesActions.FETCH_BASE_CURRENCY_FAILURE(error.message)
+            );
+        }
     }
 }
 
@@ -151,10 +159,12 @@ function* fetchExchangeRatesSaga(
             currencyCodes
         );
         yield put(currenciesActions.SET_EXCHANGE_RATES(response));
-    } catch (error: any) {
-        yield put(
-            currenciesActions.FETCH_EXCHANGE_RATES_FAILURE(error.message)
-        );
+    } catch (error) {
+        if (error instanceof Error) {
+            yield put(
+                currenciesActions.FETCH_EXCHANGE_RATES_FAILURE(error.message)
+            );
+        }
     }
 }
 
