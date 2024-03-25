@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 export const FETCH_CURRENCIES_URL: string =
     'https://restcountries.com/v3.1/all?fields=currencies';
 export const FETCH_EXCHANGE_RATES_URL: string =
-    'https://api.currencyapi.com/v3/latest?apikey=cur_live_Ue67NDHXG1Q3Qo2CXng3GA8hSwN2kwDF1ynX0zRJ';
+    'https://api.currencyapi.com/v3/latest?apikey=cur_live_inOgMkylfQbPCJPxChEu4bkTgSHx9t1mwvoUiUO4';
 export const FETCH_BASE_CURRENCY_URL: string = 'https://ipapi.co/currency/';
 
 interface Currency {
